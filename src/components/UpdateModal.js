@@ -2,14 +2,9 @@ import React, { useState } from 'react';
 import { Modal, Button, Form, Input } from 'semantic-ui-react';
 import postService from '../services/posts';
 
-const UpdateModal = ({ oldUserName, oldContent, oldId, handleEditPost }) => {
-  const [userName, setUserName] = useState(oldUserName);
+const UpdateModal = ({ oldContent, oldId, handleEditPost }) => {
   const [content, setContent] = useState(oldContent);
   const [showModal, setShowModal] = useState(false);
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-  };
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -17,9 +12,9 @@ const UpdateModal = ({ oldUserName, oldContent, oldId, handleEditPost }) => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (userName && content) {
+    if (content) {
       setShowModal(false);
-      const response = await postService.updatePost(oldId, { userName, date: new Date(), content });
+      const response = await postService.updatePost(oldId, { content });
       if (response) {
         handleEditPost(oldId, response);
       }
@@ -38,10 +33,6 @@ const UpdateModal = ({ oldUserName, oldContent, oldId, handleEditPost }) => {
       <Modal.Header>Update Post</Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSubmit}>
-          <Form.Field>
-            <label htmlFor='username-input'>Username</label>
-            <Input id='username-input' value={userName} onChange={handleUserNameChange} />
-          </Form.Field>
           <Form.Field>
             <label htmlFor='content-input'>Content</label>
             <Input id='content-input' value={content} onChange={handleContentChange} />

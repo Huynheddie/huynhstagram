@@ -29,7 +29,10 @@
 		"no-unused-vars": "warn",
 		"no-console": "off",
 		"react/prop-types": "off",
-		"jsx-a11y/label-has-associated-control": "off"
+		"jsx-a11y/label-has-associated-control": "off",
+		"react/self-closing-comp": "off",
+		"max-len": "off",
+		"react/jsx-props-no-spreading": "off"
 		// // Indent with 4 spaces
 		// "indent": ["error", 4],
 

@@ -1,26 +1,36 @@
-import React, { useState } from 'react';
-import { Card, Form, Input, Button } from 'semantic-ui-react';
+import React, { useState, useRef } from 'react';
+import { Card, Form, Input, Button, Image } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import postService from '../services/posts';
 
-const CreatePostCard = ({ handleNewPost }) => {
-  const [userName, setUserName] = useState('');
+const CreatePost = () => {
   const [content, setContent] = useState('');
-
-  const handleUserNameChange = (event) => {
-    setUserName(event.target.value);
-  };
-
-  const handleContentChange = (event) => {
-    setContent(event.target.value);
-  };
+  const [previewSource, setPreviewSource] = useState('');
+  const [selectedFile, setSelectedFile] = useState();
+  const history = useHistory();
+  const fileInputRef = useRef();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (userName && content) {
-      const response = await postService.createPost({ userName, date: new Date(), content });
-      if (response) {
-        handleNewPost(response);
-      }
+    if (content && selectedFile) {
+      await postService.createPost({ date: new Date(), content }, selectedFile);
+      history.push('/');
+    }
+  };
+
+  const previewFile = (file) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = () => {
+      setPreviewSource(reader.result);
+    };
+  };
+
+  const handleFileInputChange = (event) => {
+    const file = event.target.files[0];
+    if (file) {
+      setSelectedFile(file);
+      previewFile(file);
     }
   };
 
@@ -30,13 +40,26 @@ const CreatePostCard = ({ handleNewPost }) => {
         <h2>Create a post</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Field>
-            <label htmlFor='username-input'>Username</label>
-            <Input id='username-input' placeholder='ex. spagheddie' value={userName} onChange={handleUserNameChange} />
+            <label htmlFor='content-input'>Content</label>
+            <Input id='content-input' placeholder='ex. is incredible' value={content} onChange={({ target }) => setContent(target.value)} />
           </Form.Field>
           <Form.Field>
-            <label htmlFor='content-input'>Content</label>
-            <Input id='content-input' placeholder='ex. is incredible' value={content} onChange={handleContentChange} />
+            <label htmlFor='image-input'>Image</label>
+            <Button
+              content='Upload'
+              labelPosition='left'
+              icon='upload'
+              onClick={() => fileInputRef.current.click()}
+            />
+            <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
           </Form.Field>
+          { previewSource && (
+            <Card>
+              <Card.Content>
+                <Image src={previewSource} />
+              </Card.Content>
+            </Card>
+          )}
           <Button color='instagram' type='submit'>Submit</Button>
         </Form>
       </Card.Content>
@@ -44,4 +67,4 @@ const CreatePostCard = ({ handleNewPost }) => {
   );
 };
 
-export default CreatePostCard;
+export default CreatePost;

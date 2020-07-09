@@ -1,43 +1,64 @@
 import React, { useEffect, useState } from 'react';
+import { BrowserRouter as Router, Switch } from 'react-router-dom';
 import './Home.scss';
 import NavMenu from './components/NavMenu';
+import Login from './components/Login';
+import Notification from './components/Notification';
+import CreatePost from './components/CreatePostCard';
 // import ReduxStuff from './components/ReduxStuff';
+import PrivateRoute from './components/PrivateRoute';
+import PublicRoute from './components/PublicRoute';
+import UserProfile from './components/UserProfile';
+import Home from './components/Home';
 import postService from './services/posts';
-import Posts from './components/Posts';
-import CreatePostCard from './components/CreatePostCard';
 
 const App = () => {
-  const [posts, setPosts] = useState([]);
+  // const [user, setUser] = useState(null);
+  const [errorMessage, setErrorMessage] = useState(null);
+  const loggedInUser = window.localStorage.getItem('loggedInUser');
 
   useEffect(() => {
-    const getAllPosts = async () => {
-      const allPosts = await postService.getAllPosts();
-      console.log(allPosts);
-      setPosts(allPosts);
-    };
+    if (loggedInUser) {
+      const userCredentials = JSON.parse(loggedInUser);
+      // setUser(userCredentials);
+      postService.setToken(userCredentials.token);
+    }
+  }, [loggedInUser]);
 
-    getAllPosts();
+  useEffect(() => {
+    document.title = 'Huynhstagram';
   }, []);
-
-  const handleNewPost = (newPost) => {
-    setPosts(posts.concat(newPost));
-  };
-
-  const handleEditPost = (oldId, newPost) => {
-    setPosts(posts.map((post) => (post.id === oldId ? newPost : post)));
-  };
-
-  const handleDeletePost = (postId) => {
-    setPosts(posts.filter((post) => post.id !== postId));
-  };
 
   return (
     <div>
-      <NavMenu />
-      <div style={{ paddingTop: '100px' }}>
-        <CreatePostCard handleNewPost={handleNewPost} />
-        <Posts posts={posts} handleDeletePost={handleDeletePost} handleEditPost={handleEditPost} />
-      </div>
+      <Router>
+        <NavMenu />
+        <Notification message={errorMessage} />
+        <Switch>
+          <PublicRoute
+            component={Login}
+            data={{
+              setErrorMessage,
+            }}
+            path='/login'
+          />
+
+          <PrivateRoute
+            component={CreatePost}
+            path='/post'
+          />
+
+          <PrivateRoute
+            component={UserProfile}
+            path='/user'
+          />
+
+          <PrivateRoute
+            component={Home}
+            path='/'
+          />
+        </Switch>
+      </Router>
 
       {/* <ReduxStuff /> */}
 

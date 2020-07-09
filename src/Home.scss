@@ -1,21 +1,51 @@
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script");
 
 html,
-#root {
-	background-color: #fafafa;
+#root,
+body {
+	background-color: #fafafa !important;
+}
+
+body {
+	padding-top: 80px !important;
+}
+
+a {
+	color: black;
+}
+
+a:hover {
+	color: black;
 }
 
 .navbar-logo {
 	font-family: "Oleo Script";
 	font-size: 30px;
 	font-weight: normal;
+	color: black;
 }
 
-.counter-card {
-	text-align: center;
-	margin: 20% 30% 5% 30%;
+.navbar-logo:hover {
+	color: black;
 }
 
-.add-card {
-	margin: 0% 20% 0% 20%;
+.post-header {
+	font-size: 1.28571429em;
+	font-weight: 700;
+	padding: 14px;
 }
+
+.post-icon-menu {
+	margin: 0 !important ;
+	border: none;
+	padding: 5px 5px 0px 5px;
+}
+
+// .counter-card {
+// 	text-align: center;
+// 	margin: 20% 30% 5% 30%;
+// }
+
+// .add-card {
+// 	margin: 0% 20% 0% 20%;
+// }
