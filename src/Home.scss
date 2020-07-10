@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Oleo+Script");
+@import url("https://fonts.googleapis.com/css2?family=Lato:wght@300");
 
 html,
 #root,
@@ -30,15 +31,43 @@ a:hover {
 }
 
 .post-header {
-	font-size: 1.28571429em;
+	font-size: 14px !important;
+}
+
+.post-subheader {
+	font-size: 14px !important;
 	font-weight: 700;
-	padding: 14px;
 }
 
 .post-icon-menu {
 	margin: 0 !important ;
 	border: none;
 	padding: 5px 5px 0px 5px;
+}
+
+.post-content {
+	font-size: 14px;
+	margin-bottom: 0.5em;
+}
+
+.post-comment {
+	width: 100%;
+	border: 0px;
+	border-top: 1px solid rgba(138, 138, 138, 0.15);
+	border-radius: 0;
+	padding: 9.5px 14px;
+	outline: none;
+	font-size: 14px;
+	font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", "sans-serif";
+	color: rgba(0, 0, 0, 0.68);
+}
+
+.more-options:hover {
+	background-color: white !important;
+}
+
+.ui.inverted.dimmer {
+	background-color: transparent !important;
 }
 
 // .counter-card {

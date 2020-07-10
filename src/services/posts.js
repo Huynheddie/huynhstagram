@@ -40,6 +40,11 @@ const updatePost = async (id, newPost) => {
   return response.data;
 };
 
+const patchPost = async (id, newPost) => {
+  const response = await axios.patch(`${baseUrl}/${id}`, newPost);
+  return response.data;
+};
+
 const deletePost = async (id) => {
   const response = await axios.delete(`${baseUrl}/${id}`);
   return response.data;
@@ -50,6 +55,7 @@ export default {
   getSpecificPost,
   createPost,
   updatePost,
+  patchPost,
   deletePost,
   setToken,
 };

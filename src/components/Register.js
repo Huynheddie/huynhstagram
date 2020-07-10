@@ -1,17 +1,24 @@
 import React, { useState } from 'react';
 import { Card, Form, Input, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
+import userService from '../services/user';
 import loginService from '../services/login';
 import postService from '../services/posts';
 
-const Login = ({ setErrorMessage }) => {
+const Register = ({ setErrorMessage }) => {
+  const history = useHistory();
+  const [name, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const history = useHistory();
 
-  const handleLogin = async (event) => {
+  const handleRegister = async (event) => {
     event.preventDefault();
     try {
+      await userService.register({
+        username, name, password,
+      });
+      // setErrorMessage(null);
+      // history.push('/');
       const user = await loginService.login({
         username, password,
       });
@@ -21,7 +28,7 @@ const Login = ({ setErrorMessage }) => {
       postService.setToken(user.token);
       setErrorMessage(null);
       history.push('/');
-    } catch (exception) {
+    } catch (error) {
       setErrorMessage('Wrong credentials');
       setTimeout(() => {
         setErrorMessage(null);
@@ -32,8 +39,12 @@ const Login = ({ setErrorMessage }) => {
   return (
     <Card centered>
       <Card.Content>
-        <h2>Login</h2>
-        <Form onSubmit={handleLogin}>
+        <h2>Register</h2>
+        <Form onSubmit={handleRegister}>
+          <Form.Field>
+            <label htmlFor='name-input'>Full name</label>
+            <Input id='name-input' value={name} onChange={({ target }) => setFullName(target.value)} />
+          </Form.Field>
           <Form.Field>
             <label htmlFor='username-input'>Username</label>
             <Input id='username-input' value={username} onChange={({ target }) => setUsername(target.value)} />
@@ -43,12 +54,6 @@ const Login = ({ setErrorMessage }) => {
             <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
           </Form.Field>
           <div>
-            <Button
-              color='linkedin'
-              type='button'
-              onClick={() => history.push('../register')}
-            >Register
-            </Button>
             <Button color='instagram' type='submit' style={{ float: 'right' }}>Submit</Button>
           </div>
         </Form>
@@ -57,4 +62,4 @@ const Login = ({ setErrorMessage }) => {
   );
 };
 
-export default Login;
+export default Register;

@@ -6,7 +6,6 @@ const Home = () => {
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
-    console.log('home');
     const getAllPosts = async () => {
       const allPosts = await postService.getAllPosts();
       console.log(allPosts);

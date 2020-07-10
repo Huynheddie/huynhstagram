@@ -11,6 +11,7 @@ import PublicRoute from './components/PublicRoute';
 import UserProfile from './components/UserProfile';
 import Home from './components/Home';
 import postService from './services/posts';
+import Register from './components/Register';
 
 const App = () => {
   // const [user, setUser] = useState(null);
@@ -41,6 +42,14 @@ const App = () => {
               setErrorMessage,
             }}
             path='/login'
+          />
+
+          <PublicRoute
+            component={Register}
+            data={{
+              setErrorMessage,
+            }}
+            path='/register'
           />
 
           <PrivateRoute
