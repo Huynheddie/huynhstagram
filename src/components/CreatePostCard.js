@@ -7,12 +7,14 @@ const CreatePost = () => {
   const [content, setContent] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
+  const [isLoading, setIsLoading] = useState(false);
   const history = useHistory();
   const fileInputRef = useRef();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (content && selectedFile) {
+      setIsLoading(true);
       await postService.createPost({ date: new Date(), content }, selectedFile);
       history.push('/');
     }
@@ -49,18 +51,17 @@ const CreatePost = () => {
               content='Upload'
               labelPosition='left'
               icon='upload'
+              fluid
               onClick={() => fileInputRef.current.click()}
             />
             <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
           </Form.Field>
           { previewSource && (
             <Card>
-              <Card.Content>
-                <Image src={previewSource} />
-              </Card.Content>
+              <Image src={previewSource} />
             </Card>
           )}
-          <Button color='instagram' type='submit'>Submit</Button>
+          { selectedFile && <Button color='instagram' style={{ float: 'right' }} loading={isLoading} type='submit'>Submit</Button>}
         </Form>
       </Card.Content>
     </Card>

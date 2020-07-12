@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card, Menu } from 'semantic-ui-react';
-import { Image } from 'cloudinary-react';
+import { CloudinaryContext, Image, Transformation } from 'cloudinary-react';
 // import postService from '../services/posts';
 import UpdateModal from './UpdateModal';
 import PostMenu from './PostMenu';
@@ -38,7 +38,22 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
 
           <Card.Header className='post-header'>
             <Menu borderless fluid icon>
-              <Menu.Item style={{ fontWeight: '700' }}>{post.user.username}</Menu.Item>
+              <Menu.Item>
+
+                <CloudinaryContext cloudName='huynhstagram'>
+                  <Image publicId={post.user.profileImage}>
+                    <Transformation
+                      width='30'
+                      height='30'
+                      crop='thumb'
+                      radius='max'
+                      border='2px_solid_rgb:e8e8e8'
+                    />
+                  </Image>
+                </CloudinaryContext>
+
+              </Menu.Item>
+              <Menu.Item style={{ fontWeight: '700', paddingLeft: '0' }}>{post.user.username}</Menu.Item>
               <Menu.Item position='right'></Menu.Item>
               { userOwnedPost(post)
                 && <PostActions post={post} index={index} handleOpenModal={handleOpenModal} handleDeletePost={handleDeletePost} />}

@@ -31,14 +31,14 @@ const UpdateModal = ({ index, showUpdateModal, oldContent, oldId, handleEditPost
       closeOnDimmerClick
       closeOnEscape
     >
-      <Modal.Header>Update Post</Modal.Header>
+      <Modal.Header>Edit Post</Modal.Header>
       <Modal.Content>
         <Form onSubmit={handleSubmit}>
           <Form.Field>
-            <label htmlFor='content-input'>Content</label>
+            <label htmlFor='content-input'>Caption</label>
             <Input value={content} onChange={handleContentChange} />
           </Form.Field>
-          <Button color='instagram' type='submit'>Submit</Button>
+          <Button color='instagram' type='submit' style={{ float: 'right', marginBottom: '10px' }}>Submit</Button>
         </Form>
       </Modal.Content>
     </Modal>

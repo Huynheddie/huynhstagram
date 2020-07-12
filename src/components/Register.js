@@ -10,10 +10,12 @@ const Register = ({ setErrorMessage }) => {
   const [name, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
+      setIsLoading(true);
       await userService.register({
         username, name, password,
       });
@@ -54,7 +56,7 @@ const Register = ({ setErrorMessage }) => {
             <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
           </Form.Field>
           <div>
-            <Button color='instagram' type='submit' style={{ float: 'right' }}>Submit</Button>
+            <Button color='instagram' type='submit' loading={isLoading} style={{ float: 'right' }}>Submit</Button>
           </div>
         </Form>
       </Card.Content>
