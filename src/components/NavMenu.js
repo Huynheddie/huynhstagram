@@ -6,7 +6,7 @@ const NavMenu = () => {
   const location = useLocation();
 
   return (
-    <Menu borderless icon fixed='top' style={{ paddingLeft: '20%', paddingRight: '20%' }}>
+    <Menu borderless icon fixed='top' id='nav-menu'>
       <Menu.Item fitted='horizontally' position='left' name='logo'>
         <Link to='/' className='navbar-logo'>Huynhstagram</Link>
       </Menu.Item>

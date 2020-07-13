@@ -3,7 +3,7 @@ import { Card, Form, Input, Button, Image } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import postService from '../services/posts';
 
-const CreatePost = () => {
+const CreatePost = ({ handleNewPost }) => {
   const [content, setContent] = useState('');
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
@@ -15,7 +15,8 @@ const CreatePost = () => {
     event.preventDefault();
     if (content && selectedFile) {
       setIsLoading(true);
-      await postService.createPost({ date: new Date(), content }, selectedFile);
+      const response = await postService.createPost({ date: new Date(), content }, selectedFile);
+      handleNewPost(response);
       history.push('/');
     }
   };

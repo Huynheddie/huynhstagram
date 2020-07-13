@@ -12,7 +12,7 @@ const PostActions = ({ post, index, handleOpenModal, handleDeletePost }) => {
     <Dropdown
       item
       direction='left'
-      icon='ellipsis vertical'
+      icon='ellipsis horizontal'
       position='right'
       style={{ fontSize: '18px', paddingRight: '15px' }}
       className='more-options'

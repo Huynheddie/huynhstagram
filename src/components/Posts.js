@@ -7,6 +7,7 @@ import PostMenu from './PostMenu';
 import CommentInput from './CommentInput';
 import PostTextSection from './PostTextSection';
 import PostActions from './PostActions';
+import dateFormatter from '../utils/dateFormatter';
 
 const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -34,10 +35,10 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
   return (
     <div>
       {posts.map((post, index) => (
-        <Card key={post.id} centered style={{ width: '600px', overflow: 'hidden', marginBottom: '20px' }} header={post.username}>
+        <Card key={post.id} centered style={{ width: '600px', overflow: 'hidden', marginBottom: '20px' }}>
 
           <Card.Header className='post-header'>
-            <Menu borderless fluid icon>
+            <Menu borderless fluid icon style={{ borderRadius: '0' }}>
               <Menu.Item>
 
                 <CloudinaryContext cloudName='huynhstagram'>
@@ -67,7 +68,19 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
           />
 
           <PostMenu post={post} handleEditPost={handleEditPost} />
+
+          <Card.Content style={{ borderTop: '0px', paddingBottom: '0px' }}>
+            <Card.Header className='post-subheader' style={{ marginBottom: '0' }}>{post.likes.length} likes</Card.Header>
+          </Card.Content>
+
           <PostTextSection post={post} />
+
+          <Card.Content style={{ borderTop: '0px', paddingTop: '0px' }}>
+            <Card.Meta>
+              {dateFormatter.timeSince(post.date)} ago
+            </Card.Meta>
+          </Card.Content>
+
           <CommentInput post={post} handleEditPost={handleEditPost} />
           <UpdateModal
             index={index}

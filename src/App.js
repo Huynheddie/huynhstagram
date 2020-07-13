@@ -12,23 +12,48 @@ import UserProfile from './components/UserProfile';
 import Home from './components/Home';
 import postService from './services/posts';
 import Register from './components/Register';
+import DetailedPost from './components/DetailedPost';
 
 const App = () => {
-  // const [user, setUser] = useState(null);
-  const [errorMessage, setErrorMessage] = useState(null);
   const loggedInUser = window.localStorage.getItem('loggedInUser');
+  const [errorMessage, setErrorMessage] = useState(null);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (loggedInUser) {
       const userCredentials = JSON.parse(loggedInUser);
-      // setUser(userCredentials);
       postService.setToken(userCredentials.token);
     }
   }, [loggedInUser]);
 
   useEffect(() => {
     document.title = 'Huynhstagram';
+    const getAllPosts = async () => {
+      const allPosts = await postService.getAllPosts();
+      console.log(allPosts);
+      setPosts(allPosts);
+    };
+
+    getAllPosts();
   }, []);
+
+  useEffect(() => {
+    console.log(posts);
+  }, [posts]);
+
+  const handleNewPost = (newPost) => {
+    const newPosts = posts;
+    newPosts.unshift(newPost);
+    setPosts(newPosts);
+  };
+
+  const handleEditPost = (oldId, newPost) => {
+    setPosts(posts.map((post) => (post.id === oldId ? newPost : post)));
+  };
+
+  const handleDeletePost = (postId) => {
+    setPosts(posts.filter((post) => post.id !== postId));
+  };
 
   return (
     <div>
@@ -53,7 +78,20 @@ const App = () => {
           />
 
           <PrivateRoute
+            component={DetailedPost}
+            data={{
+              posts,
+              handleEditPost,
+              handleDeletePost,
+            }}
+            path='/post/:id'
+          />
+
+          <PrivateRoute
             component={CreatePost}
+            data={{
+              handleNewPost,
+            }}
             path='/post'
           />
 
@@ -64,6 +102,12 @@ const App = () => {
 
           <PrivateRoute
             component={Home}
+            data={{
+              posts,
+              handleNewPost,
+              handleEditPost,
+              handleDeletePost,
+            }}
             path='/'
           />
         </Switch>

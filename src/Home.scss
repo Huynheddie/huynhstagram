@@ -30,6 +30,12 @@ a:hover {
 	color: black;
 }
 
+#nav-menu {
+	padding-left: 20%;
+	padding-right: 20%;
+	border-radius: 0px !important;
+}
+
 .post-header {
 	font-size: 14px !important;
 }
@@ -68,6 +74,12 @@ a:hover {
 
 .ui.inverted.dimmer {
 	background-color: transparent !important;
+}
+
+#detailed-post-header {
+	border: 0px !important;
+	border-radius: 0px !important;
+	margin-bottom: 15px;
 }
 
 // .counter-card {

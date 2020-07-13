@@ -1,8 +1,10 @@
 import React from 'react';
 import { Menu, Icon } from 'semantic-ui-react';
+import { useHistory } from 'react-router-dom';
 import postService from '../services/posts';
 
 const PostMenu = ({ post, handleEditPost }) => {
+  const history = useHistory();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
   const handleLike = async (postId, likes) => {
@@ -14,6 +16,7 @@ const PostMenu = ({ post, handleEditPost }) => {
       newLikes = likes.filter((user) => user !== loggedInUser.username);
     }
     const response = await postService.patchPost(postId, { likes: newLikes });
+    console.log(response);
     if (response) {
       handleEditPost(postId, response);
     }
@@ -27,7 +30,7 @@ const PostMenu = ({ post, handleEditPost }) => {
           : <Icon name='heart' size='large' color='red' style={{ cursor: 'pointer' }} />}
       </Menu.Item>
 
-      <Menu.Item>
+      <Menu.Item onClick={() => history.push(`/post/${post.id}`)}>
         <Icon name='comment outline' size='large' style={{ cursor: 'pointer' }} />
       </Menu.Item>
 
