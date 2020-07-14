@@ -3,7 +3,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import postService from '../services/posts';
 
-const PostMenu = ({ post, handleEditPost }) => {
+const PostMenu = ({ post, handleEditPost, focus, setInputFocus }) => {
   const history = useHistory();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
@@ -22,6 +22,14 @@ const PostMenu = ({ post, handleEditPost }) => {
     }
   };
 
+  const handleComment = async () => {
+    if (setInputFocus) {
+      setInputFocus(focus + 1);
+    } else {
+      history.push(`/post/${post.id}`);
+    }
+  };
+
   return (
     <Menu borderless icon text className='post-icon-menu'>
       <Menu.Item onClick={() => handleLike(post.id, post.likes)}>
@@ -30,7 +38,7 @@ const PostMenu = ({ post, handleEditPost }) => {
           : <Icon name='heart' size='large' color='red' style={{ cursor: 'pointer' }} />}
       </Menu.Item>
 
-      <Menu.Item onClick={() => history.push(`/post/${post.id}`)}>
+      <Menu.Item onClick={handleComment}>
         <Icon name='comment outline' size='large' style={{ cursor: 'pointer' }} />
       </Menu.Item>
 

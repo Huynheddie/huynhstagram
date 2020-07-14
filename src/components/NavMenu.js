@@ -36,7 +36,7 @@ const NavMenu = () => {
       </Menu.Item> */}
 
       <Menu.Item name='NEW POST'>
-        <Link to='post' style={{ color: 'black' }}>
+        <Link to='/post' style={{ color: 'black' }}>
           { location.pathname !== '/post'
             ? <Icon size='large' name='plus square outline' />
             : <Icon size='large' name='plus square' />}

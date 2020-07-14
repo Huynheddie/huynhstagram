@@ -48,7 +48,6 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
                       height='30'
                       crop='thumb'
                       radius='max'
-                      border='2px_solid_rgb:e8e8e8'
                     />
                   </Image>
                 </CloudinaryContext>
@@ -73,7 +72,7 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
             <Card.Header className='post-subheader' style={{ marginBottom: '0' }}>{post.likes.length} likes</Card.Header>
           </Card.Content>
 
-          <PostTextSection post={post} />
+          <PostTextSection post={post} handleEditPost={handleEditPost} style={{ paddingBottom: '0px' }} />
 
           <Card.Content style={{ borderTop: '0px', paddingTop: '0px' }}>
             <Card.Meta>

@@ -32,7 +32,8 @@
 		"jsx-a11y/label-has-associated-control": "off",
 		"react/self-closing-comp": "off",
 		"max-len": "off",
-		"react/jsx-props-no-spreading": "off"
+		"react/jsx-props-no-spreading": "off",
+		"react/no-array-index-key": "off"
 		// // Indent with 4 spaces
 		// "indent": ["error", 4],
 

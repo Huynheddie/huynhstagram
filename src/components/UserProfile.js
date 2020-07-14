@@ -69,7 +69,6 @@ const UserProfile = () => {
                   height='80'
                   crop='thumb'
                   radius='max'
-                  border='2px_solid_rgb:e8e8e8'
                 />
               </CImage>
             </CloudinaryContext>

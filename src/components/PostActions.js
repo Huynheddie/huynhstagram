@@ -14,7 +14,7 @@ const PostActions = ({ post, index, handleOpenModal, handleDeletePost }) => {
       direction='left'
       icon='ellipsis horizontal'
       position='right'
-      style={{ fontSize: '18px', paddingRight: '15px' }}
+      style={{ fontSize: '18px', paddingRight: '15px', color: '#636363' }}
       className='more-options'
     >
       <Dropdown.Menu>
