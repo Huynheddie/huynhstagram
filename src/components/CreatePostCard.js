@@ -42,10 +42,12 @@ const CreatePost = ({ handleNewPost }) => {
       <Card.Content>
         <h2>Create a post</h2>
         <Form onSubmit={handleSubmit}>
+
           <Form.Field>
             <label htmlFor='content-input'>Content</label>
             <Input id='content-input' placeholder='ex. is incredible' value={content} onChange={({ target }) => setContent(target.value)} />
           </Form.Field>
+
           <Form.Field>
             <label htmlFor='image-input'>Image</label>
             <Button
@@ -57,11 +59,13 @@ const CreatePost = ({ handleNewPost }) => {
             />
             <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
           </Form.Field>
+
           { previewSource && (
             <Card>
               <Image src={previewSource} />
             </Card>
           )}
+
           { selectedFile && <Button color='instagram' style={{ float: 'right' }} loading={isLoading} type='submit'>Submit</Button>}
         </Form>
       </Card.Content>

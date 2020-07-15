@@ -19,14 +19,16 @@ const Register = ({ setErrorMessage }) => {
       await userService.register({
         username, name, password,
       });
-      // setErrorMessage(null);
-      // history.push('/');
+
+      // Automatically login new user
       const user = await loginService.login({
         username, password,
       });
+
       window.localStorage.setItem(
         'loggedInUser', JSON.stringify(user),
       );
+
       postService.setToken(user.token);
       setErrorMessage(null);
       history.push('/');

@@ -34,23 +34,28 @@ const Login = ({ setErrorMessage }) => {
       <Card.Content>
         <h2>Login</h2>
         <Form onSubmit={handleLogin}>
+
           <Form.Field>
             <label htmlFor='username-input'>Username</label>
             <Input id='username-input' value={username} onChange={({ target }) => setUsername(target.value)} />
           </Form.Field>
+
           <Form.Field>
             <label htmlFor='password-input'>Password</label>
             <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
           </Form.Field>
+
           <div>
             <Button
               color='linkedin'
               type='button'
               onClick={() => history.push('../register')}
-            >Register
+            >
+              Register
             </Button>
             <Button color='instagram' type='submit' style={{ float: 'right' }}>Submit</Button>
           </div>
+
         </Form>
       </Card.Content>
     </Card>

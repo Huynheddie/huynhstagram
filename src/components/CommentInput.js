@@ -4,7 +4,6 @@ import postService from '../services/posts';
 const CommentInput = ({ post, handleEditPost, focus }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [comment, setComment] = useState('');
-
   const inputRef = useRef(null);
 
   useEffect(() => {

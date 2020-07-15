@@ -76,6 +76,32 @@ a:hover {
 	background-color: transparent !important;
 }
 
+.detailed-post-image-column {
+	padding-right: 0px !important;
+}
+
+.detailed-post-image-card {
+	height: 100%;
+	border-radius: 0px !important;
+	background-color: #fafafa !important;
+}
+
+.detailed-post-image-content {
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+	align-items: center !important;
+	display: flex !important;
+}
+
+.detailed-post-image {
+	width: 100% !important;
+	height: auto;
+}
+
+.detailed-post-text-column {
+	padding-left: 0px !important;
+}
+
 #detailed-post-header {
 	border: 0px !important;
 	border-radius: 0px !important;
@@ -100,6 +126,12 @@ a:hover {
 .detailed-comment-time {
 	padding-left: 39px;
 	font-size: 12px !important;
+}
+
+.detailed-post-details {
+	padding-top: 5px !important;
+	flex-grow: 0 !important;
+	border-top: 0px !important;
 }
 
 .comment-profile-image {

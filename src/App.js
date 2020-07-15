@@ -12,7 +12,7 @@ import UserProfile from './components/UserProfile';
 import Home from './components/Home';
 import postService from './services/posts';
 import Register from './components/Register';
-import DetailedPost from './components/DetailedPost';
+import DetailedPost from './components/DetailedPost/DetailedPost';
 
 const App = () => {
   const loggedInUser = window.localStorage.getItem('loggedInUser');
@@ -30,15 +30,15 @@ const App = () => {
     document.title = 'Huynhstagram';
     const getAllPosts = async () => {
       const allPosts = await postService.getAllPosts();
-      console.log(allPosts);
       setPosts(allPosts);
     };
 
     getAllPosts();
   }, []);
 
+  // Debugging purposes only
   useEffect(() => {
-    console.log(posts);
+    console.log('Posts:', posts);
   }, [posts]);
 
   const handleNewPost = (newPost) => {
