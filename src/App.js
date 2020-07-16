@@ -15,14 +15,21 @@ import Register from './components/Register';
 import DetailedPost from './components/DetailedPost/DetailedPost';
 
 const App = () => {
-  const loggedInUser = window.localStorage.getItem('loggedInUser');
+  const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [errorMessage, setErrorMessage] = useState(null);
   const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (loggedInUser) {
-      const userCredentials = JSON.parse(loggedInUser);
-      postService.setToken(userCredentials.token);
+      const currentTime = new Date();
+
+      // Require login after an hour
+      if (currentTime - new Date(loggedInUser.lastLogin) >= 3600000) {
+        localStorage.removeItem('loggedInUser');
+      } else {
+        const userCredentials = loggedInUser;
+        postService.setToken(userCredentials.token);
+      }
     }
   }, [loggedInUser]);
 

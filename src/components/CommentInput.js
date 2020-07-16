@@ -1,5 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import postService from '../services/posts';
+import commentService from '../services/comments';
 
 const CommentInput = ({ post, handleEditPost, focus }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -12,26 +13,25 @@ const CommentInput = ({ post, handleEditPost, focus }) => {
     }
   }, [focus]);
 
-  const addComment = async (postId, comments, newComment) => {
-    comments.push(newComment);
-    const response = await postService.patchPost(postId, { comments });
+  const addComment = async (newComment, postId) => {
+    const response = await commentService.createComment(newComment, postId);
     if (response) {
       handleEditPost(postId, response);
     }
   };
 
-  const handleComment = async (event, postId, comments) => {
+  const handleComment = async (event, postId) => {
     event.preventDefault();
     const newComment = {
-      username: loggedInUser.username, userId: loggedInUser.id, comment, likes: [], profileImage: loggedInUser.profileImage, date: new Date(),
+      user: loggedInUser.id, comment, likes: [], date: new Date(),
     };
-    addComment(postId, comments, newComment);
+    addComment(newComment, postId);
   };
 
   return (
     <div>
       <form onSubmit={(e) => {
-        handleComment(e, post.id, post.comments);
+        handleComment(e, post.id);
         setComment('');
       }}
       >

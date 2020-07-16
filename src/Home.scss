@@ -68,6 +68,20 @@ a:hover {
 	color: rgba(0, 0, 0, 0.68);
 }
 
+.post-comment-display {
+	display: inline-flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding-left: 0px;
+	padding-bottom: 5px;
+}
+
+.post-comment-content {
+	padding-left: 14px !important;
+	padding-top: 5px !important;
+	padding-bottom: 5px !important;
+}
+
 .more-options:hover {
 	background-color: white !important;
 }

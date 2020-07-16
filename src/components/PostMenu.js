@@ -16,7 +16,6 @@ const PostMenu = ({ post, handleEditPost, focus, setInputFocus }) => {
       newLikes = likes.filter((user) => user !== loggedInUser.username);
     }
     const response = await postService.patchPost(postId, { likes: newLikes });
-    console.log(response);
     if (response) {
       handleEditPost(postId, response);
     }
