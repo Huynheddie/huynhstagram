@@ -8,6 +8,7 @@ import CommentInput from './CommentInput';
 import PostTextSection from './PostTextSection';
 import PostActions from './PostActions';
 import dateFormatter from '../utils/dateFormatter';
+import { Link } from 'react-router-dom';
 
 const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -53,7 +54,11 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
                 </CloudinaryContext>
 
               </Menu.Item>
-              <Menu.Item style={{ fontWeight: '700', paddingLeft: '0' }}>{post.user.username}</Menu.Item>
+              <Menu.Item style={{ fontWeight: '700', paddingLeft: '0' }}>
+                <Link to={`/user/${post.user.id}`} style={{color: 'black'}}>
+                  {post.user.username}
+                </Link>
+              </Menu.Item>
               <Menu.Item position='right'></Menu.Item>
               { userOwnedPost(post)
                 && <PostActions post={post} index={index} handleOpenModal={handleOpenModal} handleDeletePost={handleDeletePost} />}

@@ -1,9 +1,11 @@
 import React from 'react';
 import { Menu, Icon, Input } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
+import Logout from './Logout';
 
 const NavMenu = () => {
   const location = useLocation();
+  const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
   return (
     <Menu borderless icon fixed='top' id='nav-menu'>
@@ -43,12 +45,17 @@ const NavMenu = () => {
         </Link>
       </Menu.Item>
 
+      {loggedInUser && 
       <Menu.Item name='PROFILE'>
-        <Link to='/user' style={{ color: 'black' }}>
+        <Link to={`/user/${loggedInUser.id}`} style={{ color: 'black' }}>
           { location.pathname !== '/user'
             ? <Icon size='large' name='user outline' />
             : <Icon size='large' name='user' />}
         </Link>
+      </Menu.Item>}
+
+      <Menu.Item name='LOGOUT'>
+        <Logout />
       </Menu.Item>
 
     </Menu>

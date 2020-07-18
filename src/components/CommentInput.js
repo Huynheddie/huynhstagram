@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import postService from '../services/posts';
 import commentService from '../services/comments';
 
 const CommentInput = ({ post, handleEditPost, focus }) => {

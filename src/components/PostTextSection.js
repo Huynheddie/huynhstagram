@@ -4,6 +4,7 @@ import dateFormatter from '../utils/dateFormatter';
 import postService from '../services/posts';
 import UserThumbnail from './UserThumbnail';
 import DetailedPostContent from './DetailedPost/DetailedPostContent';
+import { Link } from 'react-router-dom';
 
 const PostTextSection = ({ post, isDetailedPage, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -38,7 +39,11 @@ const PostTextSection = ({ post, isDetailedPage, handleEditPost }) => {
           &&
         (
           <div className='post-comment-display'>
-            <Card.Header className='post-subheader'>{post.user.username}</Card.Header>
+            <Card.Header className='post-subheader'>
+              <Link to={`/user/${post.user.id}`} style={{color: 'black'}}>
+                {post.user.username}
+              </Link>
+            </Card.Header>
             <Card.Description className='post-content'>
               {post.content}
             </Card.Description>
@@ -49,7 +54,11 @@ const PostTextSection = ({ post, isDetailedPage, handleEditPost }) => {
         {post.comments.map((comment, index) => (
           <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
             { isDetailedPage && <UserThumbnail comment={comment} /> }
-            <Card.Content key={index + comment.username} style={{ fontWeight: '700' }}> {comment.user.username}</Card.Content>
+            <Card.Content key={index + comment.username} style={{ fontWeight: '700' }}> 
+              <Link to={`/user/${comment.user.id}`} style={{color: 'black'}}>
+                {comment.user.username}
+              </Link>
+            </Card.Content>
             <Card.Content key={index + comment.comment} style={{ marginLeft: '5px' }}>{comment.comment}</Card.Content>
             {comment.likes.findIndex((user) => user === loggedInUser.username) === -1
               ? <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name='heart outline' color='grey' className='comment-like-icon' />

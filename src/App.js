@@ -8,7 +8,7 @@ import CreatePost from './components/CreatePostCard';
 // import ReduxStuff from './components/ReduxStuff';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
-import UserProfile from './components/UserProfile';
+import UserProfile from './components/UserProfile/UserProfile';
 import Home from './components/Home';
 import postService from './services/posts';
 import Register from './components/Register';
@@ -45,7 +45,7 @@ const App = () => {
 
   // Debugging purposes only
   useEffect(() => {
-    console.log('Posts:', posts);
+    // console.log('Posts:', posts);
   }, [posts]);
 
   const handleNewPost = (newPost) => {
@@ -104,7 +104,7 @@ const App = () => {
 
           <PrivateRoute
             component={UserProfile}
-            path='/user'
+            path='/user/:id'
           />
 
           <PrivateRoute

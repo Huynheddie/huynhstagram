@@ -13,6 +13,11 @@ const getAllPosts = async () => {
   return response.data.sort((a, b) => new Date(b.date) - new Date(a.date));
 };
 
+const getPostsByUser = async (userId) => {
+  const response = await axios.get(`${baseUrl}/byUser/${userId}`);
+  return JSON.parse(response.data).sort((a, b) => new Date(b.date) - new Date(a.date));
+}
+
 const getSpecificPost = async (id) => {
   const response = await axios.get(`${baseUrl}/${id}`);
   return response.data;
@@ -52,6 +57,7 @@ const deletePost = async (id) => {
 
 export default {
   getAllPosts,
+  getPostsByUser,
   getSpecificPost,
   createPost,
   updatePost,
