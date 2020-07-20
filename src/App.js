@@ -45,7 +45,7 @@ const App = () => {
 
   // Debugging purposes only
   useEffect(() => {
-    // console.log('Posts:', posts);
+    console.log('Posts:', posts);
   }, [posts]);
 
   const handleNewPost = (newPost) => {
