@@ -13,6 +13,11 @@ const getUser = async (id) => {
   return response.data;
 };
 
+const getAllUsers = async () => {
+  const response = await axios.get(`${baseUrl}`);
+  return response.data;
+};
+
 const updateProfileImage = async (id, imageFile) => {
   try {
     const fileContents = await fileHelper.readUploadedFileAsText(imageFile);
@@ -24,4 +29,4 @@ const updateProfileImage = async (id, imageFile) => {
   }
 };
 
-export default { register, getUser, updateProfileImage };
+export default { register, getUser, getAllUsers, updateProfileImage };

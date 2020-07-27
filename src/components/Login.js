@@ -30,35 +30,44 @@ const Login = ({ setErrorMessage }) => {
   };
 
   return (
-    <Card centered>
-      <Card.Content>
-        <h2>Login</h2>
-        <Form onSubmit={handleLogin}>
+    <>
+      <Card centered>
+        <Card.Content>
+          <h2>Login</h2>
+          <Form onSubmit={handleLogin}>
 
-          <Form.Field>
-            <label htmlFor='username-input'>Username</label>
-            <Input id='username-input' value={username} onChange={({ target }) => setUsername(target.value)} />
-          </Form.Field>
+            <Form.Field>
+              <label htmlFor='username-input'>Username</label>
+              <Input id='username-input' value={username} onChange={({ target }) => setUsername(target.value)} />
+            </Form.Field>
 
-          <Form.Field>
-            <label htmlFor='password-input'>Password</label>
-            <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
-          </Form.Field>
+            <Form.Field>
+              <label htmlFor='password-input'>Password</label>
+              <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
+            </Form.Field>
 
-          <div>
-            <Button
-              color='linkedin'
-              type='button'
-              onClick={() => history.push('../register')}
-            >
-              Register
-            </Button>
-            <Button color='instagram' type='submit' style={{ float: 'right' }}>Submit</Button>
-          </div>
+            <div>
+              {/* <Button
+                color='linkedin'
+                type='button'
+                onClick={() => history.push('../register')}
+              >
+                Register
+              </Button> */}
+              <Button type='submit' fluid style={{ backgroundColor: '#0095f6', color: 'white' }}>Submit</Button>
+            </div>
 
-        </Form>
-      </Card.Content>
-    </Card>
+          </Form>
+        </Card.Content>
+      </Card>
+
+      <Card centered>
+        <Card.Content style={{ display: 'flex', justifyContent: 'center' }}>
+          <p style={{ margin: 0 }}>Don't have an account?</p>
+          <a href='/register' style={{ margin: '0px 0px 0px 5px', fontWeight: '600', color: '#0095f6' }}>Sign Up</a>
+        </Card.Content>
+      </Card>
+    </>
   );
 };
 

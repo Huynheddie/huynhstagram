@@ -201,6 +201,46 @@ a:hover {
 	padding-left: 3px;
 }
 
+#suggest-div {
+	position: fixed !important;
+	top: 15%;
+	left: 68% !important;
+	width: 275px !important;
+}
+
+.suggest-wrapper {
+	display: flex;
+}
+
+.suggest-header {
+	display: flex;
+	flex-flow: column;
+	justify-content: center;
+	margin-left: 10px;
+}
+
+.suggestion-text-header {
+	color: #8e8e8e;
+	font-weight: 600;
+	font-size: 15px;
+	line-height: 18px;
+	margin-top: 20px;
+}
+
+.suggestion-map-div {
+	margin-top: 10px;
+	display: flex;
+	align-items: center;
+}
+
+.suggest-follow-btn {
+	margin: 0 0 0 0;
+	margin-left: auto;
+	color: #0095f6;
+	font-size: 12px;
+	cursor: pointer;
+}
+
 // .counter-card {
 // 	text-align: center;
 // 	margin: 20% 30% 5% 30%;

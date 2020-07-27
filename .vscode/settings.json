@@ -17,6 +17,11 @@
 		"titleBar.inactiveBackground": "#0a88a999",
 		"titleBar.inactiveForeground": "#e7e7e799"
 	},
-	"peacock.color": "#0a88a9",
-	"eslint.workingDirectories": ["./src"]
+	"peacock.color": "#0a88a9"
+	// "eslint.workingDirectories": [
+	// 	{
+	// 		"directory": "./src",
+	// 		"changeProcessCWD": true
+	// 	}
+	// ]
 }

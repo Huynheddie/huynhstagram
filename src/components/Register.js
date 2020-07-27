@@ -58,7 +58,13 @@ const Register = ({ setErrorMessage }) => {
             <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
           </Form.Field>
           <div>
-            <Button color='instagram' type='submit' loading={isLoading} style={{ float: 'right' }}>Submit</Button>
+            <Button
+              type='submit'
+              loading={isLoading}
+              fluid
+              style={{ backgroundColor: '#0095f6', color: 'white' }}
+            >Submit
+            </Button>
           </div>
         </Form>
       </Card.Content>
