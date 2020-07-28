@@ -46,16 +46,18 @@ const NavMenu = () => {
       </Menu.Item>
 
       <Menu.Item name='PROFILE'>
-        <Link to={ loggedInUser ? `/user/${loggedInUser.id}` : ''} style={{ color: 'black' }}>
+        <Link to={loggedInUser ? `/user/${loggedInUser.id}` : ''} style={{ color: 'black' }}>
           { location.pathname !== '/user'
             ? <Icon size='large' name='user outline' />
             : <Icon size='large' name='user' />}
         </Link>
       </Menu.Item>
 
+      { loggedInUser && (
       <Menu.Item name='LOGOUT'>
         <Logout />
       </Menu.Item>
+      )}
 
     </Menu>
   );

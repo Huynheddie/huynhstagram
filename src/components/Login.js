@@ -47,13 +47,6 @@ const Login = ({ setErrorMessage }) => {
             </Form.Field>
 
             <div>
-              {/* <Button
-                color='linkedin'
-                type='button'
-                onClick={() => history.push('../register')}
-              >
-                Register
-              </Button> */}
               <Button type='submit' fluid style={{ backgroundColor: '#0095f6', color: 'white' }}>Submit</Button>
             </div>
 

@@ -203,7 +203,7 @@ a:hover {
 
 #suggest-div {
 	position: fixed !important;
-	top: 15%;
+	top: 14%;
 	left: 68% !important;
 	width: 275px !important;
 }
@@ -233,11 +233,12 @@ a:hover {
 	align-items: center;
 }
 
-.suggest-follow-btn {
+#suggest-follow-btn {
 	margin: 0 0 0 0;
-	margin-left: auto;
-	color: #0095f6;
-	font-size: 12px;
+	margin-left: auto !important;
+	box-shadow: none !important;
+	font-size: 13px !important;
+	font-weight: 600;
 	cursor: pointer;
 }
 

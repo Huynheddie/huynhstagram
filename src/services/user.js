@@ -22,11 +22,16 @@ const updateProfileImage = async (id, imageFile) => {
   try {
     const fileContents = await fileHelper.readUploadedFileAsText(imageFile);
     const newProfileImage = { profileImage: fileContents };
-    const response = await axios.patch(`${baseUrl}/${id}`, newProfileImage);
+    const response = await axios.patch(`${baseUrl}/profileimage/${id}`, newProfileImage);
     return response.data;
   } catch (error) {
     console.log(error);
   }
 };
 
-export default { register, getUser, getAllUsers, updateProfileImage };
+const followOtherUser = async (currentUserId, targetUserId) => {
+  const response = await axios.patch(`${baseUrl}/followUser`, { currentUserId, targetUserId });
+  return response.data;
+};
+
+export default { register, getUser, getAllUsers, updateProfileImage, followOtherUser };
