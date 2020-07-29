@@ -170,6 +170,8 @@ a:hover {
 	justify-content: space-evenly;
 	max-width: 1000px;
 	margin: auto;
+	border-top: 1px solid #dbdbdb;
+	padding-top: 50px;
 }
 
 .user-profile-post-overlay {
@@ -240,6 +242,57 @@ a:hover {
 	font-size: 13px !important;
 	font-weight: 600;
 	cursor: pointer;
+}
+
+.profile-header {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 40px;
+	margin-top: 10px;
+}
+
+.profile-text-header {
+	place-self: start;
+	margin-top: 30px;
+	margin-left: 80px;
+	display: flex;
+	align-items: center;
+	flex-wrap: wrap;
+}
+
+.profile-text-username {
+	font-weight: 300;
+	margin-bottom: 0px;
+}
+
+#profile-header-edit-btn {
+	margin-left: 20px !important;
+	padding: 10px 10px !important;
+	font-weight: 600 !important;
+	color: black !important;
+	font-size: 15px;
+}
+
+.profile-text-header-info {
+	display: flex;
+	width: 100%;
+}
+
+.profile-user-info {
+	display: flex;
+	flex-basis: 100%;
+	margin-top: 20px;
+}
+
+.profile-user-info p {
+	margin-right: 30px;
+	font-size: 15px;
+}
+
+.profile-user-name {
+	margin-top: 10px;
+	font-size: 16px;
 }
 
 // .counter-card {
