@@ -35,12 +35,7 @@ const UserProfile = () => {
       { user
       && (
       <>
-        {/* <Card centered>
-          <UserProfileHeader user={user} />
-          <UpdateProfilePicture />
-        </Card> */}
-
-        <UserProfileHeader user={user} userPosts={userPosts} />
+        <UserProfileHeader user={user} userPosts={userPosts} setUser={setUser} />
 
         <div className='user-profile-posts-section'>
           { userPosts.length > 0 && userPosts.map((post) => (

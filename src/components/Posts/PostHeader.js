@@ -1,9 +1,9 @@
 import React from 'react';
 import { Menu } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import postHelper from '../../utils/postHelper';
 import PostActions from './PostActions';
 import UserThumbnail from './UserThumbnail';
+import UserProfileLink from '../UserProfile/UserProfileLink';
 
 const PostHeader = ({ post, index, isDetailedPage, handleOpenModal, handleDeletePost }) => (
   <Menu borderless fluid icon id={isDetailedPage ? 'detailed-post-header' : ''} style={{ borderRadius: '0px' }}>
@@ -11,10 +11,8 @@ const PostHeader = ({ post, index, isDetailedPage, handleOpenModal, handleDelete
       <UserThumbnail profileImage={post.user.profileImage} />
     </Menu.Item>
 
-    <Menu.Item style={{ fontWeight: '700', paddingLeft: '0' }}>
-      <Link to={`/user/${post.user.id}`} style={{ color: 'black' }}>
-        {post.user.username}
-      </Link>
+    <Menu.Item style={{ paddingLeft: '0' }}>
+      <UserProfileLink userId={post.user.id} username={post.user.username} />
     </Menu.Item>
     <Menu.Item position='right'></Menu.Item>
 

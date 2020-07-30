@@ -1,16 +1,14 @@
 import React from 'react';
 import { Card } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';
+import UserProfileLink from '../UserProfile/UserProfileLink';
 
 const PostContent = ({ post, isDetailedPage }) => (
   <div className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
     { isDetailedPage && <UserThumbnail profileImage={post.user.profileImage} /> }
     <Card.Header className='post-subheader'>
-      <Link to={`/user/${post.user.id}`} style={{ color: 'black' }}>
-        {post.user.username}
-      </Link>
+      <UserProfileLink userId={post.user.id} username={post.user.username} />
     </Card.Header>
     <Card.Description className='post-content'>
       {post.content}

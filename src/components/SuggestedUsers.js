@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
+import { Link } from 'react-router-dom';
 import UserThumbnail from './Posts/UserThumbnail';
 import userService from '../services/user';
+import UserProfileLink from './UserProfile/UserProfileLink';
 
 const SuggestedUsers = ({ currentUser, users, setUsers }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -17,17 +19,12 @@ const SuggestedUsers = ({ currentUser, users, setUsers }) => {
     setIsLoadingFollow(loading);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
-    console.log(response);
     setUsers(response);
 
     loading = [...loading];
     loading[index] = false;
     setIsLoadingFollow(loading);
   };
-
-  useEffect(() => {
-    console.log(isLoadingFollow);
-  }, [isLoadingFollow]);
 
   return (
     <Grid.Column width='2' id='suggest-div'>
@@ -43,7 +40,7 @@ const SuggestedUsers = ({ currentUser, users, setUsers }) => {
       {users.map((user, index) => (
         <div key={user.id} className='suggestion-map-div'>
           <UserThumbnail profileImage={user.profileImage} width={35} height={35} />
-          <h5 style={{ marginTop: '0', marginBottom: '0' }}>{user.username}</h5>
+          <UserProfileLink userId={user.id} username={user.username} />
           <Button
             basic
             loading={isLoadingFollow[index]}

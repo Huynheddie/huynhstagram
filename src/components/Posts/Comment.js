@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card, Icon } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';
+import UserProfileLink from '../UserProfile/UserProfileLink';
 
 const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -13,9 +13,7 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike }) =>
       { isDetailedPage && <UserThumbnail profileImage={comment.profileImage} /> }
 
       <Card.Content key={index + comment.username} style={{ fontWeight: '700' }}>
-        <Link to={`/user/${comment.user.id}`} style={{ color: 'black' }}>
-          {comment.user.username}
-        </Link>
+        <UserProfileLink userId={comment.user.id} username={comment.user.username} />
       </Card.Content>
 
       <Card.Content key={index + comment.comment} style={{ marginLeft: '5px' }}>{comment.comment}</Card.Content>
