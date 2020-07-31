@@ -39,11 +39,11 @@ const UpdateProfilePicture = () => {
 
   return (
     <Card.Content>
-      <Card.Header style={{ marginBottom: '10px' }}>Change Profile Picture</Card.Header>
+      <h3 style={{ marginBottom: '10px' }}>Change Profile Picture</h3>
       <Form onSubmit={handleSubmit}>
         <Form.Field>
           { previewSource && (
-          <Card>
+          <Card centered>
             <Image src={previewSource} />
           </Card>
           )}
@@ -62,7 +62,7 @@ const UpdateProfilePicture = () => {
             color='instagram'
             type='submit'
             loading={isLoading}
-            style={{ float: 'right', marginTop: '10px' }}
+            style={{ float: 'right', marginTop: '10px', marginBottom: '10px' }}
           >Submit
           </Button>
           )}

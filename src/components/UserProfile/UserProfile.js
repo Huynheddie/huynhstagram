@@ -41,6 +41,7 @@ const UserProfile = () => {
           { userPosts.length > 0 && userPosts.map((post) => (
             <div key={post.id} style={{ marginBottom: '25px' }} className='user-profile-post-overlay'>
               <Link to={`/post/${post.id}`}>
+
                 <CloudinaryContext cloudName='huynhstagram'>
                   <Image publicId={post.imageId}>
                     <Transformation
@@ -50,6 +51,7 @@ const UserProfile = () => {
                     />
                   </Image>
                 </CloudinaryContext>
+
                 <div className='user-profile-overlay-icons'>
                   <Icon name='heart' size='large' />
                   <div className='post-overlay-text'>
@@ -60,6 +62,7 @@ const UserProfile = () => {
                     {post.comments.length}
                   </div>
                 </div>
+
               </Link>
             </div>
           )) }

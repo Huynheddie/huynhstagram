@@ -158,6 +158,19 @@ a:hover {
 	cursor: pointer;
 }
 
+.comment-edit-icon {
+	position: absolute;
+	right: 50px;
+	cursor: pointer;
+	display: none !important;
+}
+
+.detailed-comment-text:hover {
+	.comment-edit-icon {
+		display: block !important;
+	}
+}
+
 #user-profile-posts {
 	padding-left: 21px;
 	padding-bottom: 50px;
@@ -308,6 +321,14 @@ a:hover {
 	margin-left: 20px !important;
 	padding: 5px 31px 5px 32px !important;
 	color: black;
+}
+
+.user-profile-link {
+	max-width: 100px !important;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	font-weight: 600 !important;
+	color: black !important;
 }
 
 // .counter-card {

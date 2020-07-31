@@ -25,7 +25,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
         <PostContent post={post} isDetailedPage={isDetailedPage} />
 
         {post.comments.map((comment, index) => (
-          <Comment 
+          <Comment
             comment={comment}
             post={post}
             isDetailedPage={isDetailedPage}

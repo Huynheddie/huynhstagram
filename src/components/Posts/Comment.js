@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Card, Icon } from 'semantic-ui-react';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';
@@ -7,16 +7,23 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
+  useEffect(() => {
+    console.log(comment);
+  }, []);
+
   return (
     <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
 
-      { isDetailedPage && <UserThumbnail profileImage={comment.profileImage} /> }
+      { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} /> }
 
       <Card.Content key={index + comment.username} style={{ fontWeight: '700' }}>
         <UserProfileLink userId={comment.user.id} username={comment.user.username} />
       </Card.Content>
 
       <Card.Content key={index + comment.comment} style={{ marginLeft: '5px' }}>{comment.comment}</Card.Content>
+
+      { loggedInUser.id === comment.user.id
+        && <Icon color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
 
       {comment.likes.findIndex((like) => like.user.id === loggedInUser.id) === -1
         ? <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name='heart outline' color='grey' className='comment-like-icon' />

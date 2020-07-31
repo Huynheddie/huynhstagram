@@ -38,7 +38,7 @@ const CreatePost = ({ handleNewPost }) => {
   };
 
   return (
-    <Card centered>
+    <Card centered raised>
       <Card.Content>
         <h2>Create a post</h2>
         <Form onSubmit={handleSubmit}>

@@ -34,4 +34,9 @@ const followOtherUser = async (currentUserId, targetUserId) => {
   return response.data;
 };
 
-export default { register, getUser, getAllUsers, updateProfileImage, followOtherUser };
+const deleteUser = async (userId) => {
+  const response = await axios.delete(`${baseUrl}/${userId}`);
+  return response.data;
+};
+
+export default { register, getUser, getAllUsers, updateProfileImage, followOtherUser, deleteUser };

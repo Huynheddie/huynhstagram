@@ -1,7 +1,7 @@
 import React from 'react';
 import { Dropdown } from 'semantic-ui-react';
-import postService from '../../services/posts';
 import { useHistory } from 'react-router-dom';
+import postService from '../../services/posts';
 
 const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDeletePost }) => {
   const history = useHistory();
@@ -17,7 +17,7 @@ const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDelet
       item
       direction='left'
       icon='ellipsis horizontal'
-      position='right'
+      // position='right'
       style={{ fontSize: '18px', paddingRight: '15px', color: '#636363' }}
       className='more-options'
     >
@@ -25,7 +25,7 @@ const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDelet
         <Dropdown.Item
           icon='edit outline'
           text='Edit'
-          onClick={ isDetailedPage ? handleOpenModal : () => handleOpenModal(index)}
+          onClick={isDetailedPage ? handleOpenModal : () => handleOpenModal(index)}
         />
         <Dropdown.Item
           icon='trash alternate outline'
