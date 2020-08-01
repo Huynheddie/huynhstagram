@@ -7,7 +7,7 @@ import Comment from './Comment';
 const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
-  const handleCommentLike = async (postId, comment, likes, commentIndex) => {
+  const handleCommentLike = async (postId, comment, likes) => {
     let response = null;
     if (likes.findIndex((like) => like.user.id === loggedInUser.id) === -1) {
       response = await commentService.addLike(loggedInUser.id, postId, comment._id);
@@ -31,6 +31,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             isDetailedPage={isDetailedPage}
             index={index}
             handleCommentLike={handleCommentLike}
+            handleEditPost={handleEditPost}
             key={index}
           />
         ))}

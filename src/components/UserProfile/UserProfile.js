@@ -5,7 +5,6 @@ import Transformation from 'cloudinary-react/lib/components/Transformation';
 import { Link, useParams } from 'react-router-dom';
 import { Icon } from 'semantic-ui-react';
 import userService from '../../services/user';
-import UpdateProfilePicture from './UpdateProfilePicture';
 import UserProfileHeader from './UserProfileHeader';
 import postService from '../../services/posts';
 
@@ -29,6 +28,10 @@ const UserProfile = () => {
     findUser();
     getUserPosts();
   }, [id]);
+
+  useEffect(() => {
+    if (user) { console.log('User:', user); }
+  }, [user]);
 
   return (
     <>

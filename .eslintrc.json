@@ -33,7 +33,10 @@
 		"react/self-closing-comp": "off",
 		"max-len": "off",
 		"react/jsx-props-no-spreading": "off",
-		"react/no-array-index-key": "off"
+		"react/no-array-index-key": "off",
+		"react-hooks/exhaustive-deps": "off",
+		"jsx-a11y/click-events-have-key-events": "off",
+		"jsx-a11y/no-noninteractive-element-interactions": "off"
 		// // Indent with 4 spaces
 		// "indent": ["error", 4],
 

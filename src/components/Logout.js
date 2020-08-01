@@ -12,9 +12,9 @@ const Logout = () => {
 
   return (
     <Button
-      color='instagram'
       content='Log out'
       onClick={handleLogout}
+      id='logout-btn'
     />
   );
 };

@@ -26,7 +26,7 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
       dimmer='inverted'
       size='small'
       open={showUpdateModal}
-      onClose={ isDetailedPage ? handleCloseModal : () => handleCloseModal(index)}
+      onClose={isDetailedPage ? handleCloseModal : () => handleCloseModal(index)}
       closeOnDocumentClick
       closeOnDimmerClick
       closeOnEscape
@@ -38,7 +38,8 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
             <label htmlFor='content-input'>Caption</label>
             <Input value={content} onChange={handleContentChange} />
           </Form.Field>
-          <Button color='instagram' type='submit' style={{ float: 'right', marginBottom: '10px' }}>Submit</Button>
+          <Button color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>
+          <Button type='submit' style={{ float: 'right', marginBottom: '10px', backgroundColor: '#2185d0', color: 'white' }}>Submit</Button>
         </Form>
       </Modal.Content>
     </Modal>

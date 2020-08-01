@@ -37,7 +37,7 @@ const App = () => {
     document.title = 'Huynhstagram';
     const getAllPosts = async () => {
       const allPosts = await postService.getAllPosts();
-      console.log('Posts:', allPosts);
+      // console.log('Posts:', allPosts);
       setPosts(allPosts);
     };
 

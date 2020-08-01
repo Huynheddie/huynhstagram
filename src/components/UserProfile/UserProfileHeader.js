@@ -1,14 +1,39 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import UserProfileHeaderImage from './UserProfileHeaderImage';
 import FollowButton from './FollowButton';
 import EditProfileDropdown from './EditProfileDropdown';
+import UserLists from './UserLists';
 
 const UserProfileHeader = ({ user, userPosts, setUser }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
+  const [showModal, setShowModal] = useState(false);
+  const [userList, setUserList] = useState([]);
+  const [listType, setListType] = useState();
 
+  // useEffect(() => {
+  //   console.log(user, userPosts);
+  // }, []);
   useEffect(() => {
-    console.log(user, userPosts);
-  }, []);
+    if (userList.length) {
+      console.log('UserList:', userList);
+    }
+  }, [userList]);
+
+  const handleOpenFollowers = () => {
+    setListType('followers');
+    setUserList(user.followers);
+    setShowModal(true);
+  };
+
+  const handleOpenFollowing = () => {
+    setListType('following');
+    setUserList(user.following);
+    setShowModal(true);
+  };
+
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <>
@@ -26,16 +51,16 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
           </div>
 
           <div className='profile-user-info'>
-            <p><strong>{userPosts.length}</strong> posts</p>
-            <p><strong>{user.followers.length}</strong> followers</p>
-            <p><strong>{user.following.length}</strong> following</p>
+            <p style={{ cursor: 'pointer' }}><strong>{userPosts.length}</strong> posts</p>
+            <p style={{ cursor: 'pointer' }} onClick={handleOpenFollowers}><strong>{user.followers.length}</strong> followers</p>
+            <p style={{ cursor: 'pointer' }} onClick={handleOpenFollowing}><strong>{user.following.length}</strong> following</p>
           </div>
 
           <div className='profile-user-name'>
             <p><strong>{user.name}</strong></p>
           </div>
-
         </div>
+        <UserLists open={showModal} handleCloseModal={handleCloseModal} userList={userList} listType={listType} setUser={setUser} setUserList={setUserList} />
       </div>
       )}
     </>

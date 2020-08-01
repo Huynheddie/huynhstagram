@@ -47,7 +47,7 @@ const EditProfileDropdown = () => {
       >
         <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Content>
-          <UpdateProfilePicture />
+          <UpdateProfilePicture handleCloseModal={handleCloseModal} />
         </Modal.Content>
       </Modal>
       <Confirm

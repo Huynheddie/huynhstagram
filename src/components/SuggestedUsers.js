@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Grid, Button } from 'semantic-ui-react';
-import { Link } from 'react-router-dom';
 import UserThumbnail from './Posts/UserThumbnail';
 import userService from '../services/user';
 import UserProfileLink from './UserProfile/UserProfileLink';

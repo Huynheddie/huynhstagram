@@ -3,7 +3,7 @@ import { Card, Form, Image, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import userService from '../../services/user';
 
-const UpdateProfilePicture = () => {
+const UpdateProfilePicture = ({ handleCloseModal }) => {
   const history = useHistory();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const fileInputRef = useRef();
@@ -68,7 +68,7 @@ const UpdateProfilePicture = () => {
           )}
         </Form.Field>
       </Form>
-
+      <Button color='red' style={{ marginTop: '10px' }} onClick={handleCloseModal}>Cancel</Button>
     </Card.Content>
   );
 };
