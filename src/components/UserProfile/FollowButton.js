@@ -14,7 +14,7 @@ const FollowButton = ({ user, setUser }) => {
   };
 
   return (
-    user.followers.includes(loggedInUser.id)
+    user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1
       ? (
         <Button
           basic

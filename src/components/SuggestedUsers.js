@@ -43,10 +43,10 @@ const SuggestedUsers = ({ currentUser, users, setUsers }) => {
           <Button
             basic
             loading={isLoadingFollow[index]}
-            color={user.followers.includes(loggedInUser.id) ? 'black' : 'blue'}
+            color={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
             onClick={() => handleFollow(user.id, index)}
             id='suggest-follow-btn'
-          > { user.followers.includes(loggedInUser.id) ? 'Following' : 'Follow' }
+          > { user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
           </Button>
         </div>
       ))}

@@ -10,9 +10,6 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
   const [userList, setUserList] = useState([]);
   const [listType, setListType] = useState();
 
-  // useEffect(() => {
-  //   console.log(user, userPosts);
-  // }, []);
   useEffect(() => {
     if (userList.length) {
       console.log('UserList:', userList);
@@ -20,13 +17,13 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
   }, [userList]);
 
   const handleOpenFollowers = () => {
-    setListType('followers');
+    setListType('Followers');
     setUserList(user.followers);
     setShowModal(true);
   };
 
   const handleOpenFollowing = () => {
-    setListType('following');
+    setListType('Following');
     setUserList(user.following);
     setShowModal(true);
   };
@@ -51,7 +48,7 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
           </div>
 
           <div className='profile-user-info'>
-            <p style={{ cursor: 'pointer' }}><strong>{userPosts.length}</strong> posts</p>
+            <p><strong>{userPosts.length}</strong> posts</p>
             <p style={{ cursor: 'pointer' }} onClick={handleOpenFollowers}><strong>{user.followers.length}</strong> followers</p>
             <p style={{ cursor: 'pointer' }} onClick={handleOpenFollowing}><strong>{user.following.length}</strong> following</p>
           </div>
@@ -60,7 +57,7 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
             <p><strong>{user.name}</strong></p>
           </div>
         </div>
-        <UserLists open={showModal} handleCloseModal={handleCloseModal} userList={userList} listType={listType} setUser={setUser} setUserList={setUserList} />
+        <UserLists open={showModal} handleCloseModal={handleCloseModal} user={user} userList={userList} listType={listType} setUser={setUser} setUserList={setUserList} />
       </div>
       )}
     </>

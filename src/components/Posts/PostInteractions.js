@@ -7,16 +7,10 @@ const PostInteractions = ({ post, handleEditPost, focus, setInputFocus }) => {
   const history = useHistory();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
-  const handleLike = async (postId, likes) => {
-    let newLikes = [];
-    if (likes.findIndex((user) => user === loggedInUser.username) === -1) {
-      likes.push(loggedInUser.username);
-      newLikes = likes;
-    } else {
-      newLikes = likes.filter((user) => user !== loggedInUser.username);
-    }
-    const response = await postService.patchPost(postId, { likes: newLikes });
+  const handleLike = async (postId) => {
+    const response = await postService.modifyLike(postId, loggedInUser.id);
     if (response) {
+      console.log(response);
       handleEditPost(postId, response);
     }
   };
@@ -31,8 +25,8 @@ const PostInteractions = ({ post, handleEditPost, focus, setInputFocus }) => {
 
   return (
     <Menu borderless icon text className='post-icon-menu'>
-      <Menu.Item onClick={() => handleLike(post.id, post.likes)}>
-        { post.likes.findIndex((user) => user === loggedInUser.username) === -1
+      <Menu.Item onClick={() => handleLike(post.id)}>
+        { post.likes.findIndex((x) => x.id === loggedInUser.id) === -1
           ? <Icon name='heart outline' size='large' style={{ cursor: 'pointer' }} />
           : <Icon name='heart' size='large' color='red' style={{ cursor: 'pointer' }} />}
       </Menu.Item>

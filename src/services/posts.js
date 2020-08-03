@@ -50,6 +50,11 @@ const patchPost = async (id, newPost) => {
   return response.data;
 };
 
+const modifyLike = async (postId, userId) => {
+  const response = await axios.patch(`${baseUrl}/like/${postId}`, { userId });
+  return response.data;
+};
+
 const deletePost = async (id) => {
   const response = await axios.delete(`${baseUrl}/${id}`);
   return response.data;
@@ -62,6 +67,7 @@ export default {
   createPost,
   updatePost,
   patchPost,
+  modifyLike,
   deletePost,
   setToken,
 };

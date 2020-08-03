@@ -7,7 +7,7 @@ import PostHeader from '../Posts/PostHeader';
 import UpdateModal from '../Posts/UpdateModal';
 import DetailedPostDetail from './DetailedPostDetail';
 
-const DetailedPostText = ({ post, handleEditPost, handleDeletePost }) => {
+const DetailedPostText = ({ post, handleEditPost, handleDeletePost, handleOpenLikes }) => {
   const [showUpdateModal, setShowUpdateModal] = useState(false);
   const [inputFocus, setInputFocus] = useState(0);
 
@@ -31,7 +31,7 @@ const DetailedPostText = ({ post, handleEditPost, handleDeletePost }) => {
           <PostInteractions post={post} handleEditPost={handleEditPost} focus={inputFocus} setInputFocus={setInputFocus} />
         </div>
 
-        <DetailedPostDetail post={post} />
+        <DetailedPostDetail post={post} handleOpenLikes={handleOpenLikes} />
 
         <CommentInput post={post} handleEditPost={handleEditPost} focus={inputFocus} />
 

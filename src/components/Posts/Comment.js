@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { Card, Icon, Modal } from 'semantic-ui-react';
+import React, { useState, useEffect } from 'react';
+import { Card, Icon, Modal, Loader, Dimmer } from 'semantic-ui-react';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';
 import UserProfileLink from '../UserProfile/UserProfileLink';
@@ -8,20 +8,26 @@ import commentService from '../../services/comments';
 const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [showActionModal, setShowActionModal] = useState(false);
-
-  useEffect(() => {
-    console.log(comment);
-  }, []);
+  const [loading, setLoading] = useState(false);
 
   const handleCloseModal = () => {
     setShowActionModal(false);
   };
 
   const handleRemoveComment = async () => {
+    console.log('huh');
+    setLoading(true);
     const response = await commentService.removeComment(post.id, comment._id);
     console.log(response);
     handleEditPost(post.id, response);
+    setLoading(false);
   };
+
+  useEffect(() => {
+    if (!loading) {
+      handleCloseModal();
+    }
+  }, [loading]);
 
   return (
     <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
@@ -62,7 +68,15 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
         id='comment-edit-modal'
       >
         <Modal.Content style={{ borderBottom: '1px solid #dbdbdb', cursor: 'pointer' }}>
-          <h3 onClick={handleRemoveComment} style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
+          { !loading
+            ? <h3 onClick={handleRemoveComment} style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
+            : (
+              <div style={{ height: '18px' }}>
+                <Dimmer active inverted style={{ maxHeight: '61px' }}>
+                  <Loader inverted />
+                </Dimmer>
+              </div>
+            )}
         </Modal.Content>
         <Modal.Content style={{ cursor: 'pointer' }}>
           <h3 onClick={handleCloseModal} style={{ fontWeight: '400' }} className='comment-edit-options'>Cancel</h3>

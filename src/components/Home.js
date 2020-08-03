@@ -15,7 +15,6 @@ const Home = ({ posts, handleNewPost, handleEditPost, handleDeletePost }) => {
       console.log('Users:', response);
       setUsers(response);
       response = await userService.getUser(loggedInUser.id);
-      console.log('Current user:', response);
       setCurrentUser(response);
     };
     getAllUsers();

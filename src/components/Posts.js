@@ -8,9 +8,12 @@ import CommentInput from './Posts/CommentInput';
 import PostComments from './Posts/PostComments';
 import PostHeader from './Posts/PostHeader';
 import dateFormatter from '../utils/dateFormatter';
+import UserLists from './UserProfile/UserLists';
 
 const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
   const [showUpdateModal, setShowUpdateModal] = useState([]);
+  const [showLikeModal, setShowLikeModal] = useState(false);
+  const [userList, setUserList] = useState([]);
 
   useEffect(() => {
     setShowUpdateModal(posts.map(() => false));
@@ -22,6 +25,16 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
 
   const handleOpenModal = (index) => {
     setShowUpdateModal(showUpdateModal.map((modal, i) => (i === index ? true : modal)));
+  };
+
+  const handleCloseLikeModal = () => {
+    setShowLikeModal(false);
+  };
+
+  const handleOpenLikes = (likes) => {
+    console.log(likes);
+    setUserList(likes);
+    setShowLikeModal(true);
   };
 
   return (
@@ -37,12 +50,18 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
             cloudName='huynhstagram'
             publicId={post.imageId}
             width='650'
+            style={{ width: '100%' }}
           />
 
           <PostInteractions post={post} handleEditPost={handleEditPost} />
 
           <Card.Content style={{ borderTop: '0px', paddingBottom: '0px' }}>
-            <Card.Header className='post-subheader' style={{ marginBottom: '0' }}>{post.likes.length} likes</Card.Header>
+            <Card.Header
+              className='post-subheader'
+              onClick={() => handleOpenLikes(post.likes)}
+              style={{ marginBottom: '0', cursor: 'pointer' }}
+            >{post.likes.length} likes
+            </Card.Header>
           </Card.Content>
 
           <PostComments post={post} handleEditPost={handleEditPost} style={{ paddingBottom: '0px' }} />
@@ -62,7 +81,7 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
             handleEditPost={handleEditPost}
             handleCloseModal={handleCloseModal}
           />
-
+          <UserLists open={showLikeModal} handleCloseModal={handleCloseLikeModal} userList={userList} listType='Likes' setUserList={setUserList} />
         </Card>
       ))}
     </div>

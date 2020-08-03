@@ -4,16 +4,12 @@ import UserThumbnail from '../Posts/UserThumbnail';
 import UserProfileLink from './UserProfileLink';
 import userService from '../../services/user';
 
-const UserLists = ({ open, handleCloseModal, userList, listType, setUser, setUserList }) => {
+const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, setUserList }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [isLoadingFollow, setIsLoadingFollow] = useState([]);
 
   useEffect(() => {
     setIsLoadingFollow(userList.map(() => false));
-
-    return () => {
-      console.log('leaving');
-    };
   }, []);
 
   const handleFollow = async (targetUserId, index) => {
@@ -22,8 +18,10 @@ const UserLists = ({ open, handleCloseModal, userList, listType, setUser, setUse
     setIsLoadingFollow(loading);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
-    setUser(response.find((returnedUser) => returnedUser.id === loggedInUser.id));
-    setUserList(userList.map((user) => response.find((returnedUser) => returnedUser.id === user.id)));
+    if (setUser && user.id === loggedInUser.id) {
+      setUser(response.find((returnedUser) => returnedUser.id === loggedInUser.id));
+    }
+    setUserList(userList.map((x) => response.find((returnedUser) => returnedUser.id === x.id)));
 
     loading = [...loading];
     loading[index] = false;
@@ -41,25 +39,27 @@ const UserLists = ({ open, handleCloseModal, userList, listType, setUser, setUse
       id='list-modal'
     >
       <Modal.Header style={{ textAlign: 'center', fontSize: '16px' }}>
-        {listType === 'followers' ? 'Followers' : 'Following'}
+        {listType}
         <Icon name='close' className='list-close-icon' size='large' onClick={handleCloseModal} />
       </Modal.Header>
       <Modal.Content>
-        {userList.map((user, index) => (
-          <div key={user.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-            <UserThumbnail profileImage={user.profileImage} color='ffffff' />
+        {userList.map((userObj, index) => (
+          <div key={userObj.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+            <UserThumbnail profileImage={userObj.profileImage} color='ffffff' />
             <div>
-              <UserProfileLink userId={user.id} username={user.username} />
-              <p>{user.name}</p>
+              <UserProfileLink userId={userObj.id} username={userObj.username} />
+              <p>{userObj.name}</p>
             </div>
+            { userObj.id !== loggedInUser.id && (
             <Button
-              basic={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1}
+              basic={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1}
               loading={isLoadingFollow[index]}
-              color={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
-              onClick={() => handleFollow(user.id, index)}
-              id={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'list-follow-btn' : 'suggest-follow-btn'}
-            > { user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
+              color={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
+              onClick={() => handleFollow(userObj.id, index)}
+              id={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'list-follow-btn' : 'suggest-follow-btn'}
+            > { userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
             </Button>
+            )}
           </div>
         ))}
       </Modal.Content>
