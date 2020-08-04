@@ -9,11 +9,12 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
 
   const handleCommentLike = async (postId, comment, likes) => {
     let response = null;
-    if (likes.findIndex((like) => like.user.id === loggedInUser.id) === -1) {
+    if (likes.findIndex((like) => like.id === loggedInUser.id) === -1) {
       response = await commentService.addLike(loggedInUser.id, postId, comment._id);
     } else {
       response = await commentService.removeLike(loggedInUser.id, postId, comment._id);
     }
+    console.log(response);
     handleEditPost(postId, response);
   };
 

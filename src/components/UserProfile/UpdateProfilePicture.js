@@ -62,6 +62,7 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
             color='instagram'
             type='submit'
             loading={isLoading}
+            disabled={isLoading}
             style={{ float: 'right', marginTop: '10px', marginBottom: '10px' }}
           >Submit
           </Button>

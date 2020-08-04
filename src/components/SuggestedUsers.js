@@ -46,6 +46,7 @@ const SuggestedUsers = ({ currentUser, users, setUsers }) => {
             color={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
             onClick={() => handleFollow(user.id, index)}
             id='suggest-follow-btn'
+            disabled={isLoadingFollow[index]}
           > { user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
           </Button>
         </div>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
 import { Image } from 'cloudinary-react';
-// import postService from '../services/posts';
 import UpdateModal from './Posts/UpdateModal';
 import PostInteractions from './Posts/PostInteractions';
 import CommentInput from './Posts/CommentInput';

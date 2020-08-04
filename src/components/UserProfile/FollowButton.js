@@ -22,6 +22,7 @@ const FollowButton = ({ user, setUser }) => {
           id='profile-followed-btn'
           onClick={() => handleFollow(user.id)}
           loading={isLoadingFollow}
+          disabled={isLoadingFollow}
         >
           <Icon color='black' name='user' />
           <Icon color='black' size='small' name='checkmark' />
@@ -33,6 +34,7 @@ const FollowButton = ({ user, setUser }) => {
           id='profile-follow-btn'
           onClick={() => handleFollow(user.id)}
           loading={isLoadingFollow}
+          disabled={isLoadingFollow}
         >Follow
         </Button>
       )

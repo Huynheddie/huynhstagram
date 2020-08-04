@@ -61,6 +61,7 @@ const Register = ({ setErrorMessage }) => {
             <Button
               type='submit'
               loading={isLoading}
+              disabled={isLoading}
               fluid
               style={{ backgroundColor: '#0095f6', color: 'white' }}
             >Submit

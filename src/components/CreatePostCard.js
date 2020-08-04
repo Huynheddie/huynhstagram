@@ -66,7 +66,7 @@ const CreatePost = ({ handleNewPost }) => {
             </Card>
           )}
 
-          { selectedFile && <Button color='instagram' style={{ float: 'right' }} loading={isLoading} type='submit'>Submit</Button>}
+          { selectedFile && <Button color='instagram' style={{ float: 'right' }} loading={isLoading} disabled={isLoading} type='submit'>Submit</Button>}
         </Form>
       </Card.Content>
     </Card>

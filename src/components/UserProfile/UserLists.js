@@ -57,6 +57,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
               color={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
               onClick={() => handleFollow(userObj.id, index)}
               id={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'list-follow-btn' : 'suggest-follow-btn'}
+              disabled={isLoadingFollow[index]}
             > { userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
             </Button>
             )}
