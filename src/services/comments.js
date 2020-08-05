@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/comments' : '';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/comments' : 'https://huynhstagram-backend.herokuapp.com/comments';
 
 const createComment = async (newComment, postId) => {
   const response = await axios.post(`${baseUrl}/${postId}`, newComment);

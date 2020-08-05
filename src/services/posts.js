@@ -1,7 +1,7 @@
 import axios from 'axios';
 import fileHelper from './fileHelper';
 
-const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/posts' : '';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/posts' : 'https://huynhstagram-backend.herokuapp.com/posts';
 
 let token = null;
 
