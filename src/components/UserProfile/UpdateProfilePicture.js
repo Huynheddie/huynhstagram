@@ -54,6 +54,7 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
             fluid
             onClick={() => fileInputRef.current.click()}
             type='button'
+            disabled={isLoading}
           />
           <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
           { previewSource
@@ -69,7 +70,7 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
           )}
         </Form.Field>
       </Form>
-      <Button color='red' style={{ marginTop: '10px' }} onClick={handleCloseModal}>Cancel</Button>
+      <Button color='red' style={{ marginTop: '10px' }} disabled={isLoading} onClick={handleCloseModal}>Cancel</Button>
     </Card.Content>
   );
 };

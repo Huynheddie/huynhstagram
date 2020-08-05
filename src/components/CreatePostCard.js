@@ -56,6 +56,7 @@ const CreatePost = () => {
               fluid
               type='button'
               onClick={() => fileInputRef.current.click()}
+              disabled={isLoading}
             />
             <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
           </Form.Field>
