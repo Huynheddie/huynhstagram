@@ -28,7 +28,7 @@ const DetailedPostText = ({ post, handleEditPost, handleDeletePost, handleOpenLi
         <PostComments post={post} isDetailedPage handleEditPost={handleEditPost} />
 
         <div style={{ borderTop: '1px solid rgba(138, 138, 138, 0.15)' }}>
-          <PostInteractions post={post} handleEditPost={handleEditPost} focus={inputFocus} setInputFocus={setInputFocus} />
+          <PostInteractions isDetailedPage post={post} handleEditPost={handleEditPost} focus={inputFocus} setInputFocus={setInputFocus} />
         </div>
 
         <DetailedPostDetail post={post} handleOpenLikes={handleOpenLikes} />

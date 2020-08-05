@@ -3,7 +3,7 @@ import { Menu, Icon } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import postService from '../../services/posts';
 
-const PostInteractions = ({ post, handleEditPost, focus, setInputFocus }) => {
+const PostInteractions = ({ isDetailedPage, post, handleEditPost, focus, setInputFocus }) => {
   const history = useHistory();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
 
@@ -11,7 +11,11 @@ const PostInteractions = ({ post, handleEditPost, focus, setInputFocus }) => {
     const response = await postService.modifyLike(postId, loggedInUser.id);
     if (response) {
       console.log(response);
-      handleEditPost(response);
+      if (isDetailedPage) {
+        handleEditPost(response);
+      } else {
+        handleEditPost(postId, response);
+      }
     }
   };
 

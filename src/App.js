@@ -29,6 +29,7 @@ const App = () => {
         postService.setToken(userCredentials.token);
       }
     }
+    document.title = 'Huynhstagram';
   }, [loggedInUser]);
 
   return (
