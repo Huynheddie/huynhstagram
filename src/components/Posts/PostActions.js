@@ -9,7 +9,11 @@ const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDelet
 
   const handleDelete = async (id) => {
     await postService.deletePost(id);
-    await handleDeletePost(id);
+    if (isDetailedPage) {
+      handleDeletePost();
+    } else {
+      await handleDeletePost(id);
+    }
     history.push('/');
   };
 

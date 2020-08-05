@@ -15,7 +15,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
       response = await commentService.removeLike(loggedInUser.id, postId, comment._id);
     }
     console.log(response);
-    handleEditPost(postId, response);
+    handleEditPost(response);
   };
 
   return (

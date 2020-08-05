@@ -15,7 +15,7 @@ const CommentInput = ({ post, handleEditPost, focus }) => {
   const addComment = async (newComment, postId) => {
     const response = await commentService.createComment(newComment, postId);
     if (response) {
-      handleEditPost(postId, response);
+      handleEditPost(response);
     }
   };
 

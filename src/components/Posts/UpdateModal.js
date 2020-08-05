@@ -15,7 +15,11 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
       handleCloseModal();
       const response = await postService.updatePost(oldId, { content });
       if (response) {
-        handleEditPost(oldId, response);
+        if (isDetailedPage) {
+          handleEditPost(response);
+        } else {
+          handleEditPost(oldId, response);
+        }
       }
     }
   };
@@ -38,7 +42,7 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
             <label htmlFor='content-input'>Caption</label>
             <Input value={content} onChange={handleContentChange} />
           </Form.Field>
-          <Button color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>
+          <Button type='button' color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>
           <Button type='submit' style={{ float: 'right', marginBottom: '10px', backgroundColor: '#2185d0', color: 'white' }}>Submit</Button>
         </Form>
       </Modal.Content>

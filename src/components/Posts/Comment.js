@@ -21,7 +21,7 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
     setLoading(true);
     const response = await commentService.removeComment(post.id, comment._id);
     console.log(response);
-    handleEditPost(post.id, response);
+    handleEditPost(response);
     setLoading(false);
   };
 

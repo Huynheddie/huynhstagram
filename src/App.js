@@ -17,12 +17,10 @@ import DetailedPost from './components/DetailedPost/DetailedPost';
 const App = () => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [errorMessage, setErrorMessage] = useState(null);
-  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     if (loggedInUser) {
       const currentTime = new Date();
-
       // Require login after an hour
       if (currentTime - new Date(loggedInUser.lastLogin) >= 3600000) {
         localStorage.removeItem('loggedInUser');
@@ -32,37 +30,6 @@ const App = () => {
       }
     }
   }, [loggedInUser]);
-
-  useEffect(() => {
-    document.title = 'Huynhstagram';
-    const getAllPosts = async () => {
-      const allPosts = await postService.getAllPosts();
-      setPosts(allPosts);
-      // setPosts(allPosts.filter(post => post.user.id == loggedInUser.id || post.user.id ... ))
-    };
-
-    getAllPosts();
-  }, []);
-
-  useEffect(() => {
-    if (posts.length > 0) {
-      console.log('Posts:', posts);
-    }
-  }, [posts]);
-
-  const handleNewPost = (newPost) => {
-    const newPosts = posts;
-    newPosts.unshift(newPost);
-    setPosts(newPosts);
-  };
-
-  const handleEditPost = (oldId, newPost) => {
-    setPosts(posts.map((post) => (post.id === oldId ? newPost : post)));
-  };
-
-  const handleDeletePost = (postId) => {
-    setPosts(posts.filter((post) => post.id !== postId));
-  };
 
   return (
     <div>
@@ -88,19 +55,11 @@ const App = () => {
 
           <PrivateRoute
             component={DetailedPost}
-            data={{
-              posts,
-              handleEditPost,
-              handleDeletePost,
-            }}
             path='/post/:id'
           />
 
           <PrivateRoute
             component={CreatePost}
-            data={{
-              handleNewPost,
-            }}
             path='/post'
           />
 
@@ -111,12 +70,6 @@ const App = () => {
 
           <PrivateRoute
             component={Home}
-            data={{
-              posts,
-              handleNewPost,
-              handleEditPost,
-              handleDeletePost,
-            }}
             path='/'
           />
         </Switch>

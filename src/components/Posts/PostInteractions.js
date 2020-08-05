@@ -11,7 +11,7 @@ const PostInteractions = ({ post, handleEditPost, focus, setInputFocus }) => {
     const response = await postService.modifyLike(postId, loggedInUser.id);
     if (response) {
       console.log(response);
-      handleEditPost(postId, response);
+      handleEditPost(response);
     }
   };
 

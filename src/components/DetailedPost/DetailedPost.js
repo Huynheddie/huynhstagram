@@ -1,18 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import { Grid } from 'semantic-ui-react';
-import { useParams } from 'react-router-dom';
+import { useParams, useHistory } from 'react-router-dom';
 import DetailedPostImage from './DetailedPostImage';
 import DetailedPostText from './DetailedPostText';
 import UserLists from '../UserProfile/UserLists';
+import postService from '../../services/posts';
 
-const DetailedPost = ({ posts, handleEditPost, handleDeletePost }) => {
+const DetailedPost = () => {
   const { id } = useParams();
   const [post, setPost] = useState(null);
   const [showLikeModal, setShowLikeModal] = useState(false);
   const [userList, setUserList] = useState([]);
+  const history = useHistory();
 
   const handleCloseLikeModal = () => {
     setShowLikeModal(false);
+  };
+
+  const handleEditPost = (updatedPost) => {
+    setPost(updatedPost);
+  };
+
+  const handleDeletePost = (deletePost) => {
+    console.log('Request to delete post:', deletePost);
+    history.push('/');
   };
 
   const handleOpenLikes = (likes) => {
@@ -22,8 +33,13 @@ const DetailedPost = ({ posts, handleEditPost, handleDeletePost }) => {
   };
 
   useEffect(() => {
-    setPost(posts.find((p) => p.id === id));
-  }, [posts]);
+    const getPost = async () => {
+      const response = await postService.getSpecificPost(id);
+      console.log(response);
+      setPost(response);
+    };
+    getPost();
+  }, []);
 
   return (
     <>
