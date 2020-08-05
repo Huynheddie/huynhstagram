@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import commentService from '../../services/comments';
 
-const CommentInput = ({ post, handleEditPost, focus }) => {
+const CommentInput = ({ isDetailedPage, post, handleEditPost, focus }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [comment, setComment] = useState('');
   const inputRef = useRef(null);
@@ -15,7 +15,13 @@ const CommentInput = ({ post, handleEditPost, focus }) => {
   const addComment = async (newComment, postId) => {
     const response = await commentService.createComment(newComment, postId);
     if (response) {
-      handleEditPost(response);
+      if (isDetailedPage) {
+        handleEditPost(response);
+        console.log('hm');
+      } else {
+        handleEditPost(postId, response);
+        console.log('huh');
+      }
     }
   };
 

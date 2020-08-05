@@ -33,7 +33,7 @@ const DetailedPostText = ({ post, handleEditPost, handleDeletePost, handleOpenLi
 
         <DetailedPostDetail post={post} handleOpenLikes={handleOpenLikes} />
 
-        <CommentInput post={post} handleEditPost={handleEditPost} focus={inputFocus} />
+        <CommentInput isDetailedPage post={post} handleEditPost={handleEditPost} focus={inputFocus} />
 
         <UpdateModal
           isDetailedPage

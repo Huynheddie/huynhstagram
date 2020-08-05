@@ -52,12 +52,14 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
 
       <Card.Content key={index + comment.comment} style={{ marginLeft: '5px' }}>{comment.comment}</Card.Content>
 
-      { loggedInUser.id === comment.user.id
-          && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
+      <div className='comment-interact-icons'>
+        { loggedInUser.id === comment.user.id
+            && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
 
-      {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
-        ? <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart outline' color='grey' className='comment-like-icon' />
-        : <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart' color='red' className='comment-like-icon' />}
+        {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
+          ? <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart outline' color='grey' className='comment-like-icon' />
+          : <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart' color='red' className='comment-like-icon' />}
+      </div>
       <div style={{ flexBasis: '100%', height: '0' }}></div>
 
       { isDetailedPage

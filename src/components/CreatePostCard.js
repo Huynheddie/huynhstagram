@@ -43,7 +43,7 @@ const CreatePost = () => {
         <Form onSubmit={handleSubmit}>
 
           <Form.Field>
-            <label htmlFor='content-input'>Content</label>
+            <label htmlFor='content-input'>Caption</label>
             <Input id='content-input' placeholder='ex. is incredible' value={content} onChange={({ target }) => setContent(target.value)} />
           </Form.Field>
 

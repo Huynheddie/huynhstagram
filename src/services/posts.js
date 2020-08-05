@@ -1,7 +1,8 @@
 import axios from 'axios';
 import fileHelper from './fileHelper';
 
-const baseUrl = 'http://localhost:3001/posts';
+const baseUrl = process.env.NODE_ENV === 'development' ? 'http://localhost:3001/posts' : '';
+
 let token = null;
 
 const setToken = (newToken) => {

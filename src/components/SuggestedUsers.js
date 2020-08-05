@@ -4,7 +4,7 @@ import UserThumbnail from './Posts/UserThumbnail';
 import userService from '../services/user';
 import UserProfileLink from './UserProfile/UserProfileLink';
 
-const SuggestedUsers = ({ currentUser, users, setUsers }) => {
+const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [isLoadingFollow, setIsLoadingFollow] = useState([]);
 
@@ -18,6 +18,8 @@ const SuggestedUsers = ({ currentUser, users, setUsers }) => {
     setIsLoadingFollow(loading);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
+    setCurrentUser(response.find((x) => x.id === currentUser.id));
+
     setUsers(response);
 
     loading = [...loading];

@@ -9,7 +9,7 @@ import PostHeader from './Posts/PostHeader';
 import dateFormatter from '../utils/dateFormatter';
 import UserLists from './UserProfile/UserLists';
 
-const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
+const Posts = ({ pageLoading, posts, handleDeletePost, handleEditPost }) => {
   const [showUpdateModal, setShowUpdateModal] = useState([]);
   const [showLikeModal, setShowLikeModal] = useState(false);
   const [userList, setUserList] = useState([]);
@@ -38,7 +38,7 @@ const Posts = ({ posts, handleDeletePost, handleEditPost }) => {
 
   return (
     <div>
-      {posts.map((post, index) => (
+      { !pageLoading && posts.map((post, index) => (
         <Card key={post.id} centered style={{ width: '600px', overflow: 'hidden', marginBottom: '20px' }}>
 
           <Card.Header className='post-header'>

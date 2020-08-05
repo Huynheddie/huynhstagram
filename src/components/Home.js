@@ -4,12 +4,14 @@ import Posts from './Posts';
 import userService from '../services/user';
 import postService from '../services/posts';
 import SuggestedUsers from './SuggestedUsers';
+import ZeroPosts from './ZeroPosts';
 
 const Home = () => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [users, setUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState();
   const [posts, setPosts] = useState([]);
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -27,7 +29,6 @@ const Home = () => {
     if (currentUser) {
       const getAllPosts = async () => {
         const allPosts = await postService.getAllPosts();
-        console.log(currentUser);
         setPosts(allPosts
           .filter((post) => post.user.id === currentUser.id || currentUser.following.findIndex((person) => person.id === post.user.id) !== -1));
       };
@@ -38,6 +39,10 @@ const Home = () => {
   useEffect(() => {
     if (posts.length > 0) {
       console.log('Posts:', posts);
+    }
+
+    if (currentUser) {
+      setPageLoading(false);
     }
   }, [posts]);
 
@@ -52,14 +57,11 @@ const Home = () => {
   return (
     <Grid columns='2' centered>
       <Grid.Row>
-        <Grid.Column width='8'>
+        <Grid.Column width='10'>
           { posts.length === 0 && currentUser
-            && (
-            <div style={{ height: '300px', width: '300px', backgroundColor: 'red' }}>
-              hi world
-            </div>
-            )}
+            && <ZeroPosts pageLoading={pageLoading} />}
           <Posts
+            pageLoading={pageLoading}
             posts={posts}
             handleEditPost={handleEditPost}
             handleDeletePost={handleDeletePost}
@@ -70,6 +72,7 @@ const Home = () => {
           && (
           <SuggestedUsers
             currentUser={currentUser}
+            setCurrentUser={setCurrentUser}
             setUsers={setUsers}
             users={users.filter((user) => user.id !== loggedInUser.id)}
           />
