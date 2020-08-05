@@ -29,6 +29,11 @@ const updateProfileImage = async (id, imageFile) => {
   }
 };
 
+const updateBiography = async (id, newBio) => {
+  const response = await axios.patch(`${baseUrl}/biography/${id}`, { newBio });
+  return response.data;
+};
+
 const followOtherUser = async (currentUserId, targetUserId) => {
   const response = await axios.patch(`${baseUrl}/followUser`, { currentUserId, targetUserId });
   return response.data;
@@ -39,4 +44,4 @@ const deleteUser = async (userId) => {
   return response.data;
 };
 
-export default { register, getUser, getAllUsers, updateProfileImage, followOtherUser, deleteUser };
+export default { register, getUser, getAllUsers, updateProfileImage, updateBiography, followOtherUser, deleteUser };

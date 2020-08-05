@@ -282,7 +282,6 @@ a:hover {
 	place-self: start;
 	margin-top: 30px;
 	margin-left: 80px;
-	display: flex;
 	align-items: center;
 	flex-wrap: wrap;
 }
@@ -319,6 +318,13 @@ a:hover {
 .profile-user-name {
 	margin-top: 10px;
 	font-size: 16px;
+	width: 100%;
+}
+
+.profile-user-bio {
+	font-size: 16px;
+	max-width: 240px;
+	overflow-wrap: break-word;
 }
 
 #profile-follow-btn {

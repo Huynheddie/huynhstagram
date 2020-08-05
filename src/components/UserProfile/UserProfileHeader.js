@@ -42,7 +42,7 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
           <div className='profile-text-header-info'>
             <h2 className='profile-text-username'>{user.username}</h2>
             { loggedInUser.id === user.id
-               && <EditProfileDropdown />}
+               && <EditProfileDropdown userBio={user.biography} setUser={setUser} />}
             { loggedInUser.id !== user.id
               && <FollowButton user={user} setUser={setUser} />}
           </div>
@@ -55,6 +55,10 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
 
           <div className='profile-user-name'>
             <p><strong>{user.name}</strong></p>
+          </div>
+
+          <div className='profile-user-bio'>
+            <p>{user.biography}</p>
           </div>
         </div>
         <UserLists open={showModal} handleCloseModal={handleCloseModal} user={user} userList={userList} listType={listType} setUser={setUser} setUserList={setUserList} />
