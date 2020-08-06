@@ -1,6 +1,7 @@
 import React from 'react';
 import { Menu, Icon, Input } from 'semantic-ui-react';
 import { Link, useLocation } from 'react-router-dom';
+import GithubCorner from 'react-github-corner';
 import Logout from './Logout';
 
 const NavMenu = () => {
@@ -59,6 +60,10 @@ const NavMenu = () => {
       </Menu.Item>
       )}
 
+      <GithubCorner size='100' href='https://github.com/Huynheddie/instagram-clone-frontend' />
+      {/* <Menu.Item color='red'>
+        GitHub Repo
+      </Menu.Item> */}
     </Menu>
   );
 };
