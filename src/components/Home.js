@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Loader, Dimmer } from 'semantic-ui-react';
 import Posts from './Posts';
 import userService from '../services/user';
 import postService from '../services/posts';
@@ -56,8 +56,9 @@ const Home = () => {
 
   return (
     <Grid columns='2' centered>
+      {!pageLoading && (
       <Grid.Row>
-        <Grid.Column width='10'>
+        <Grid.Column width={posts.length === 0 ? '6' : '10'}>
           { posts.length === 0 && currentUser
             && <ZeroPosts pageLoading={pageLoading} />}
           <Posts
@@ -78,6 +79,14 @@ const Home = () => {
           />
           )}
       </Grid.Row>
+      )}
+      {pageLoading && (
+        <>
+          <Dimmer active inverted>
+            <Loader inverted size='huge' />
+          </Dimmer>
+        </>
+      )}
     </Grid>
   );
 };

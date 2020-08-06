@@ -3,7 +3,7 @@ import Image from 'cloudinary-react/lib/components/Image';
 import CloudinaryContext from 'cloudinary-react/lib/components/CloudinaryContext';
 import Transformation from 'cloudinary-react/lib/components/Transformation';
 import { Link, useParams } from 'react-router-dom';
-import { Icon } from 'semantic-ui-react';
+import { Icon, Dimmer, Loader } from 'semantic-ui-react';
 import userService from '../../services/user';
 import UserProfileHeader from './UserProfileHeader';
 import postService from '../../services/posts';
@@ -12,7 +12,8 @@ const UserProfile = () => {
   const { id } = useParams();
 
   const [user, setUser] = useState();
-  const [userPosts, setUserPosts] = useState([]);
+  const [userPosts, setUserPosts] = useState(null);
+  const [pageLoading, setPageLoading] = useState(true);
 
   useEffect(() => {
     const findUser = async () => {
@@ -30,18 +31,16 @@ const UserProfile = () => {
   }, [id]);
 
   useEffect(() => {
-    if (user) { console.log('User:', user); }
-  }, [user]);
-
-  useEffect(() => {
-    if (userPosts.length > 0) {
-      console.log('User Posts: ', userPosts);
+    if (user && userPosts) {
+      // console.log('User:', user);
+      // console.log('User Posts: ', userPosts);
+      setPageLoading(false);
     }
-  }, [userPosts]);
+  }, [user, userPosts]);
 
   return (
     <>
-      { user
+      { !pageLoading && user
       && (
       <>
         <UserProfileHeader user={user} userPosts={userPosts} setUser={setUser} />
@@ -79,6 +78,13 @@ const UserProfile = () => {
 
       </>
       )}
+
+      {pageLoading
+        && (
+          <Dimmer active inverted>
+            <Loader inverted size='huge' />
+          </Dimmer>
+        )}
 
     </>
   );

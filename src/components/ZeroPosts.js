@@ -6,7 +6,9 @@ const ZeroPosts = ({ pageLoading }) => (
     { !pageLoading && (
     <Card centered className='zero-posts'>
       <Card.Content>
-        Follow other users to get your feed started!
+        <h3 style={{ textAlign: 'center' }}>
+          Follow other users to get your feed started!
+        </h3>
       </Card.Content>
     </Card>
     )}

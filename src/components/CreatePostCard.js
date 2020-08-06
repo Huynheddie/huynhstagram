@@ -19,7 +19,7 @@ const CreatePost = () => {
     } else if (content && selectedFile) {
       setNoContentError(false);
       setIsLoading(true);
-      const response = await postService.createPost({ date: new Date(), content }, selectedFile);
+      await postService.createPost({ date: new Date(), content }, selectedFile);
       history.push('/');
     }
   };
@@ -66,7 +66,7 @@ const CreatePost = () => {
           </Form.Field>
 
           { previewSource && (
-            <Card fluid>
+            <Card centered style={{ width: '400px' }}>
               <Image fluid src={previewSource} />
             </Card>
           )}

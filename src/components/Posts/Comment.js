@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card, Icon, Modal, Loader, Dimmer } from 'semantic-ui-react';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';

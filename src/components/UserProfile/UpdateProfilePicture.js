@@ -43,7 +43,7 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
       <Form onSubmit={handleSubmit}>
         <Form.Field error>
           { previewSource && (
-          <Card fluid>
+          <Card centered style={{ width: '400px' }}>
             <Image fluid src={previewSource} />
           </Card>
           )}
