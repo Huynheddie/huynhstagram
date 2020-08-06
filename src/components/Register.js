@@ -11,6 +11,7 @@ const Register = ({ setErrorMessage }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const maxLength = 14;
 
   const handleRegister = async (event) => {
     event.preventDefault();
@@ -40,6 +41,11 @@ const Register = ({ setErrorMessage }) => {
     }
   };
 
+  const handleChangeUsername = async (event) => {
+    event.preventDefault();
+    setUsername(event.target.value.slice(0, maxLength));
+  };
+
   return (
     <Card centered>
       <Card.Content>
@@ -51,7 +57,7 @@ const Register = ({ setErrorMessage }) => {
           </Form.Field>
           <Form.Field>
             <label htmlFor='username-input'>Username</label>
-            <Input id='username-input' value={username} onChange={({ target }) => setUsername(target.value)} />
+            <Input id='username-input' value={username} onChange={handleChangeUsername} />
           </Form.Field>
           <Form.Field>
             <label htmlFor='password-input'>Password</label>
