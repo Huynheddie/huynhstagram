@@ -68,7 +68,7 @@ const Home = () => {
           />
         </Grid.Column>
         <Grid.Column width='2' />
-        { users.length > 0 && currentUser
+        { users.length > 0 && currentUser && loggedInUser
           && (
           <SuggestedUsers
             currentUser={currentUser}
