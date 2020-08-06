@@ -30,7 +30,6 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
   return (
     <Modal
       centered
-      dimmer='inverted'
       size='small'
       open={showUpdateModal}
       onClose={isDetailedPage ? handleCloseModal : () => handleCloseModal(index)}
@@ -38,11 +37,10 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
       closeOnDimmerClick
       closeOnEscape
     >
-      <Modal.Header>Edit Post</Modal.Header>
       <Modal.Content>
+        <h2>Edit Post Caption</h2>
         <Form onSubmit={handleSubmit}>
           <Form.Field>
-            <label htmlFor='content-input'>Caption</label>
             <Input value={content} onChange={handleContentChange} />
           </Form.Field>
           <Button type='button' disabled={loading} color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>

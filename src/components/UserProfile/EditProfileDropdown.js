@@ -6,14 +6,16 @@ import userService from '../../services/user';
 
 const EditProfileDropdown = ({ userBio, setUser }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
-  const [showModal, setShowModal] = useState(false);
+  const [showUpdateBio, setShowUpdateBio] = useState(false);
+  const [showUpdatePictureModal, setShowUpdatePictureModal] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const [newBio, setNewBio] = useState(userBio);
   const [newBioLoading, setNewBioLoading] = useState(false);
   const history = useHistory();
 
   const handleCloseModal = () => {
-    setShowModal(false);
+    setShowUpdatePictureModal(false);
+    setShowUpdateBio(false);
   };
 
   const handleDeleteUser = async () => {
@@ -42,22 +44,23 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
         direction='right'
       >
         <Dropdown.Menu>
-          <Dropdown.Item text='Change Profile' onClick={() => setShowModal(true)} />
+          <Dropdown.Item text='Change Biography' onClick={() => setShowUpdateBio(true)} />
+          <Dropdown.Item text='Change Profile Picture' onClick={() => setShowUpdatePictureModal(true)} />
           <Dropdown.Item text='Delete Account' onClick={() => setShowConfirm(true)} />
         </Dropdown.Menu>
       </Dropdown>
+
       <Modal
         centered
         size='tiny'
-        open={showModal}
+        open={showUpdateBio}
         onClose={handleCloseModal}
         closeOnDocumentClick
         closeOnDimmerClick
         closeOnEscape
       >
-        <Modal.Header>Edit Profile</Modal.Header>
         <Modal.Content>
-          <h3 style={{ marginBottom: '10px' }}>Change Biography</h3>
+          <h2>Edit Biography</h2>
           <Form onSubmit={handleNewBioSubmit}>
             <Form.Field>
               <Input fluid value={newBio} onChange={(event) => setNewBio(event.target.value)} />
@@ -70,12 +73,25 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
               style={{ float: 'right', marginTop: '10px', marginBottom: '10px' }}
             >Submit
             </Button>
+            <Button color='red' style={{ marginTop: '10px' }} disabled={newBioLoading} onClick={handleCloseModal}>Cancel</Button>
           </Form>
         </Modal.Content>
+      </Modal>
+
+      <Modal
+        centered
+        size='tiny'
+        open={showUpdatePictureModal}
+        onClose={handleCloseModal}
+        closeOnDocumentClick
+        closeOnDimmerClick
+        closeOnEscape
+      >
         <Modal.Content>
           <UpdateProfilePicture handleCloseModal={handleCloseModal} />
         </Modal.Content>
       </Modal>
+
       <Confirm
         open={showConfirm}
         onCancel={() => setShowConfirm(false)}

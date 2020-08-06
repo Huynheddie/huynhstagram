@@ -39,12 +39,12 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
 
   return (
     <Card.Content>
-      <h3 style={{ marginBottom: '10px' }}>Change Profile Picture</h3>
+      <h2 style={{ marginBottom: '10px' }}>Upload New Profile Picture</h2>
       <Form onSubmit={handleSubmit}>
-        <Form.Field>
+        <Form.Field error>
           { previewSource && (
-          <Card centered>
-            <Image src={previewSource} />
+          <Card fluid>
+            <Image fluid src={previewSource} />
           </Card>
           )}
           <Button
@@ -57,19 +57,17 @@ const UpdateProfilePicture = ({ handleCloseModal }) => {
             disabled={isLoading}
           />
           <input ref={fileInputRef} hidden type='file' onChange={handleFileInputChange} />
-          { previewSource
-          && (
           <Button
             color='instagram'
             type='submit'
             loading={isLoading}
-            disabled={isLoading}
+            disabled={isLoading || !previewSource}
             style={{ float: 'right', marginTop: '10px', marginBottom: '10px' }}
           >Submit
           </Button>
-          )}
         </Form.Field>
       </Form>
+
       <Button color='red' style={{ marginTop: '10px' }} disabled={isLoading} onClick={handleCloseModal}>Cancel</Button>
     </Card.Content>
   );
