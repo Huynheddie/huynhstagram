@@ -33,6 +33,12 @@ const UserProfile = () => {
     if (user) { console.log('User:', user); }
   }, [user]);
 
+  useEffect(() => {
+    if (userPosts.length > 0) {
+      console.log('User Posts: ', userPosts);
+    }
+  }, [userPosts]);
+
   return (
     <>
       { user

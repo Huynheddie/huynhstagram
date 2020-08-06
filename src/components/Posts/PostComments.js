@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Card } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import commentService from '../../services/comments';
@@ -7,8 +7,10 @@ import Comment from './Comment';
 
 const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
+  const [likeLoading, setLikeLoading] = useState(false);
 
   const handleCommentLike = async (postId, comment, likes) => {
+    setLikeLoading(true);
     let response = null;
     if (likes.findIndex((like) => like.id === loggedInUser.id) === -1) {
       response = await commentService.addLike(loggedInUser.id, postId, comment._id);
@@ -21,6 +23,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
     } else {
       handleEditPost(postId, response);
     }
+    setLikeLoading(false);
   };
 
   return (
@@ -39,6 +42,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleCommentLike={handleCommentLike}
             handleEditPost={handleEditPost}
             key={index}
+            likeLoading={likeLoading}
           />
         ))}
 
@@ -51,6 +55,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleCommentLike={handleCommentLike}
             handleEditPost={handleEditPost}
             key={index}
+            likeLoading={likeLoading}
           />
         ))}
 
@@ -63,6 +68,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleCommentLike={handleCommentLike}
             handleEditPost={handleEditPost}
             key={index}
+            likeLoading={likeLoading}
           />
         ))}
 

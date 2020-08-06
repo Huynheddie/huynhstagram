@@ -8,12 +8,16 @@ const CreatePost = () => {
   const [previewSource, setPreviewSource] = useState('');
   const [selectedFile, setSelectedFile] = useState();
   const [isLoading, setIsLoading] = useState(false);
+  const [noContentError, setNoContentError] = useState(false);
   const history = useHistory();
   const fileInputRef = useRef();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
-    if (content && selectedFile) {
+    if (content.length < 1) {
+      setNoContentError(true);
+    } else if (content && selectedFile) {
+      setNoContentError(false);
       setIsLoading(true);
       const response = await postService.createPost({ date: new Date(), content }, selectedFile);
       history.push('/');
@@ -37,14 +41,14 @@ const CreatePost = () => {
   };
 
   return (
-    <Card centered raised>
+    <Card centered raised style={{ width: '40%' }}>
       <Card.Content>
         <h2>Create a post</h2>
         <Form onSubmit={handleSubmit}>
 
-          <Form.Field>
+          <Form.Field error={noContentError}>
             <label htmlFor='content-input'>Caption</label>
-            <Input id='content-input' placeholder='ex. is incredible' value={content} onChange={({ target }) => setContent(target.value)} />
+            <Input id='content-input' value={content} onChange={({ target }) => setContent(target.value)} />
           </Form.Field>
 
           <Form.Field>
@@ -62,8 +66,8 @@ const CreatePost = () => {
           </Form.Field>
 
           { previewSource && (
-            <Card>
-              <Image src={previewSource} />
+            <Card fluid>
+              <Image fluid src={previewSource} />
             </Card>
           )}
 

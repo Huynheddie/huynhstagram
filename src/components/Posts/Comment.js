@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Card, Icon, Modal, Loader, Dimmer } from 'semantic-ui-react';
 import UserThumbnail from './UserThumbnail';
 import dateFormatter from '../../utils/dateFormatter';
@@ -6,10 +6,10 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 import commentService from '../../services/comments';
 import UserLists from '../UserProfile/UserLists';
 
-const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, handleEditPost }) => {
+const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, handleEditPost, likeLoading }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [showActionModal, setShowActionModal] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [removalLoading, setRemovalLoading] = useState(false);
   const [showLikeModal, setShowLikeModal] = useState(false);
   const [userList, setUserList] = useState([]);
 
@@ -18,18 +18,18 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
   };
 
   const handleRemoveComment = async () => {
-    setLoading(true);
+    setRemovalLoading(true);
     const response = await commentService.removeComment(post.id, comment._id);
-    console.log(response);
+    // console.log(response);
     handleEditPost(response);
-    setLoading(false);
+    setRemovalLoading(false);
   };
 
   useEffect(() => {
-    if (!loading) {
-      handleCloseModal();
+    if (!removalLoading) {
+      setShowActionModal(false);
     }
-  }, [loading]);
+  }, [removalLoading]);
 
   const handleCloseLikeModal = () => {
     setShowLikeModal(false);
@@ -50,15 +50,15 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
         <UserProfileLink userId={comment.user.id} username={comment.user.username} />
       </Card.Content>
 
-      <Card.Content key={index + comment.comment} style={{ marginLeft: '5px' }}>{comment.comment}</Card.Content>
+      <Card.Content key={index + comment.comment} style={{ marginLeft: '5px', overflowWrap: 'anywhere' }}>{comment.comment}</Card.Content>
 
       <div className='comment-interact-icons'>
         { loggedInUser.id === comment.user.id
             && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
 
         {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
-          ? <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart outline' color='grey' className='comment-like-icon' />
-          : <Icon onClick={() => handleCommentLike(post.id, comment, comment.likes)} name='heart' color='red' className='comment-like-icon' />}
+          ? <Icon loading={likeLoading} onClick={() => handleCommentLike(post.id, comment, comment.likes)} name={likeLoading ? 'spinner' : 'heart outline'} color='grey' className='comment-like-icon' />
+          : <Icon loading={likeLoading} onClick={() => handleCommentLike(post.id, comment, comment.likes)} name={likeLoading ? 'spinner' : 'heart'} color={likeLoading ? 'black' : 'red'} className='comment-like-icon' />}
       </div>
       <div style={{ flexBasis: '100%', height: '0' }}></div>
 
@@ -83,15 +83,12 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
         centered
         open={showActionModal}
         onClose={handleCloseModal}
-        closeOnDocumentClick
-        closeOnDimmerClick
-        closeOnEscape
         size='tiny'
         id='comment-edit-modal'
       >
-        <Modal.Content style={{ borderBottom: '1px solid #dbdbdb', cursor: 'pointer' }}>
-          { !loading
-            ? <h3 onClick={handleRemoveComment} style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
+        <Modal.Content onClick={!removalLoading ? handleRemoveComment : null} style={{ borderBottom: '1px solid #dbdbdb', cursor: 'pointer' }}>
+          { !removalLoading
+            ? <h3 style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
             : (
               <div style={{ height: '18px' }}>
                 <Dimmer active inverted style={{ maxHeight: '61px' }}>
@@ -100,8 +97,8 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
               </div>
             )}
         </Modal.Content>
-        <Modal.Content style={{ cursor: 'pointer' }}>
-          <h3 onClick={handleCloseModal} style={{ fontWeight: '400' }} className='comment-edit-options'>Cancel</h3>
+        <Modal.Content onClick={handleCloseModal} style={{ cursor: 'pointer' }}>
+          <h3 style={{ fontWeight: '400' }} className='comment-edit-options'>Cancel</h3>
         </Modal.Content>
       </Modal>
 

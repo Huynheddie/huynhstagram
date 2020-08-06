@@ -5,6 +5,7 @@ const CommentInput = ({ isDetailedPage, post, handleEditPost, focus }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [comment, setComment] = useState('');
   const inputRef = useRef(null);
+  const maxLength = 100;
 
   useEffect(() => {
     if (focus > 0) {
@@ -17,10 +18,8 @@ const CommentInput = ({ isDetailedPage, post, handleEditPost, focus }) => {
     if (response) {
       if (isDetailedPage) {
         handleEditPost(response);
-        console.log('hm');
       } else {
         handleEditPost(postId, response);
-        console.log('huh');
       }
     }
   };
@@ -33,6 +32,11 @@ const CommentInput = ({ isDetailedPage, post, handleEditPost, focus }) => {
     addComment(newComment, postId);
   };
 
+  const handleChangeInput = async (event) => {
+    event.preventDefault();
+    setComment(event.target.value.slice(0, maxLength));
+  };
+
   return (
     <div>
       <form onSubmit={(e) => {
@@ -43,7 +47,7 @@ const CommentInput = ({ isDetailedPage, post, handleEditPost, focus }) => {
         <input
           ref={inputRef}
           value={comment}
-          onChange={({ target }) => setComment(target.value)}
+          onChange={handleChangeInput}
           placeholder='Add a comment...'
           className='post-comment'
         />

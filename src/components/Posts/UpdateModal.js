@@ -4,6 +4,7 @@ import postService from '../../services/posts';
 
 const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId, handleEditPost, handleCloseModal }) => {
   const [content, setContent] = useState(oldContent);
+  const [loading, setLoading] = useState(false);
 
   const handleContentChange = (event) => {
     setContent(event.target.value);
@@ -12,6 +13,7 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (content) {
+      setLoading(true);
       handleCloseModal();
       const response = await postService.updatePost(oldId, { content });
       if (response) {
@@ -21,6 +23,7 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
           handleEditPost(oldId, response);
         }
       }
+      setLoading(false);
     }
   };
 
@@ -42,8 +45,8 @@ const UpdateModal = ({ isDetailedPage, index, showUpdateModal, oldContent, oldId
             <label htmlFor='content-input'>Caption</label>
             <Input value={content} onChange={handleContentChange} />
           </Form.Field>
-          <Button type='button' color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>
-          <Button type='submit' style={{ float: 'right', marginBottom: '10px', backgroundColor: '#2185d0', color: 'white' }}>Submit</Button>
+          <Button type='button' disabled={loading} color='red' onClick={() => handleCloseModal(index)}>Cancel</Button>
+          <Button type='submit' disabled={loading} loading={loading} style={{ float: 'right', marginBottom: '10px', backgroundColor: '#2185d0', color: 'white' }}>Submit</Button>
         </Form>
       </Modal.Content>
     </Modal>
