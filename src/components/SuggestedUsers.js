@@ -7,6 +7,7 @@ import UserProfileLink from './UserProfile/UserProfileLink';
 const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [isLoadingFollow, setIsLoadingFollow] = useState([]);
+  const [isLoadingDisabled, setIsLoadingDisabled] = useState(false);
 
   useEffect(() => {
     setIsLoadingFollow(users.map(() => false));
@@ -16,15 +17,17 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
     let loading = [...isLoadingFollow];
     loading[index] = true;
     setIsLoadingFollow(loading);
+    setIsLoadingDisabled(true);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
-    console.log(response);
+    // console.log(response);
     setCurrentUser(response.find((x) => x.id === currentUser.id));
     setUsers(users.map((user) => response.find((r) => r.id === user.id)));
 
     loading = [...loading];
     loading[index] = false;
     setIsLoadingFollow(loading);
+    setIsLoadingDisabled(false);
   };
 
   return (
@@ -48,7 +51,7 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
             color={user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
             onClick={() => handleFollow(user.id, index)}
             id='suggest-follow-btn'
-            disabled={isLoadingFollow[index]}
+            disabled={isLoadingDisabled}
           > { user.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
           </Button>
         </div>

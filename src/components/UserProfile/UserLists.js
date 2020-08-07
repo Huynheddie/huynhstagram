@@ -7,6 +7,7 @@ import userService from '../../services/user';
 const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, setUserList }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [isLoadingFollow, setIsLoadingFollow] = useState([]);
+  const [isDisabled, setIsDisabled] = useState(false);
 
   useEffect(() => {
     setIsLoadingFollow(userList.map(() => false));
@@ -16,6 +17,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
     let loading = [...isLoadingFollow];
     loading[index] = true;
     setIsLoadingFollow(loading);
+    setIsDisabled(true);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
     if (setUser && user.id === loggedInUser.id) {
@@ -26,6 +28,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
     loading = [...loading];
     loading[index] = false;
     setIsLoadingFollow(loading);
+    setIsDisabled(false);
   };
 
   return (
@@ -57,7 +60,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
               color={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'black' : 'blue'}
               onClick={() => handleFollow(userObj.id, index)}
               id={userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'list-follow-btn' : 'suggest-follow-btn'}
-              disabled={isLoadingFollow[index]}
+              disabled={isDisabled}
             > { userObj.followers.findIndex((x) => x.id === loggedInUser.id) !== -1 ? 'Following' : 'Follow' }
             </Button>
             )}
