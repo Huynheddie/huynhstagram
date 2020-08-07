@@ -18,9 +18,9 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
     setIsLoadingFollow(loading);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
+    console.log(response);
     setCurrentUser(response.find((x) => x.id === currentUser.id));
-
-    setUsers(response);
+    setUsers(users.map((user) => response.find((r) => r.id === user.id)));
 
     loading = [...loading];
     loading[index] = false;

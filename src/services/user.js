@@ -44,4 +44,9 @@ const deleteUser = async (userId) => {
   return response.data;
 };
 
-export default { register, getUser, getAllUsers, updateProfileImage, updateBiography, followOtherUser, deleteUser };
+const searchUsers = async (username) => {
+  const response = await axios.get(`${baseUrl}/search/${username}`);
+  return response.data;
+};
+
+export default { register, getUser, getAllUsers, updateProfileImage, updateBiography, followOtherUser, deleteUser, searchUsers };

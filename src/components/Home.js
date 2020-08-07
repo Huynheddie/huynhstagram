@@ -16,6 +16,8 @@ const Home = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       let response = await userService.getAllUsers();
+      console.log('Pre-slice', response);
+      response = response.filter((user) => user.followers.findIndex((follower) => follower.id === loggedInUser.id) === -1).slice(0, 5);
       console.log('Users:', response);
       setUsers(response);
       response = await userService.getUser(loggedInUser.id);

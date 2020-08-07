@@ -1,12 +1,44 @@
-import React from 'react';
-import { Menu, Icon, Input } from 'semantic-ui-react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Menu, Icon, Search } from 'semantic-ui-react';
+import { Link, useLocation, useHistory } from 'react-router-dom';
 import GithubCorner from 'react-github-corner';
 import Logout from './Logout';
+import userService from '../services/user';
 
 const NavMenu = () => {
   const location = useLocation();
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
+  const [search, setSearch] = useState('');
+  const [searchResults, setSearchResults] = useState([]);
+  const [loading, setLoading] = useState(false);
+  const history = useHistory();
+
+  const handleResultSelect = (event, { result }) => {
+    history.push(`/user/${result.id}`);
+  };
+
+  const handleSearchChange = (event) => {
+    setLoading(true);
+    setSearch(event.target.value);
+  };
+
+  useEffect(() => {
+    if (search) {
+      const findUsers = async () => {
+        let response = await userService.searchUsers(search);
+        response = response.map((user) => {
+          const userObj = { ...user, title: user.username, profileimage: user.profileImage };
+          delete userObj.profileImage;
+          return userObj;
+        });
+        setSearchResults(response.filter((user) => user.id !== loggedInUser.id));
+        setLoading(false);
+      };
+      findUsers();
+    } else if (search === '') {
+      setLoading(false);
+    }
+  }, [search]);
 
   return (
     <Menu borderless icon fixed='top' id='nav-menu'>
@@ -14,9 +46,18 @@ const NavMenu = () => {
         <Link to='/' className='navbar-logo'>Huynhstagram</Link>
       </Menu.Item>
 
+      { loggedInUser && (
       <Menu.Item position='left' name='search'>
-        <Input size='small' icon='search' iconPosition='left' placeholder='Search' />
+        <Search
+          loading={loading}
+          onResultSelect={handleResultSelect}
+          onSearchChange={handleSearchChange}
+          results={searchResults}
+          value={search}
+          size='small'
+        />
       </Menu.Item>
+      )}
 
       <Menu.Item name='HOME'>
         <Link to='/' style={{ color: 'black' }}>
