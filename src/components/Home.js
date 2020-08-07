@@ -16,7 +16,6 @@ const Home = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       let response = await userService.getAllUsers();
-      console.log('Pre-slice', response);
       response = response.filter((user) => user.followers.findIndex((follower) => follower.id === loggedInUser.id) === -1).slice(0, 5);
       console.log('Users:', response);
       setUsers(response);
@@ -30,9 +29,12 @@ const Home = () => {
   useEffect(() => {
     if (currentUser) {
       const getAllPosts = async () => {
+        console.log('getting');
+        setPageLoading(true);
         const allPosts = await postService.getAllPosts();
         setPosts(allPosts
           .filter((post) => post.user.id === currentUser.id || currentUser.following.findIndex((person) => person.id === post.user.id) !== -1));
+        setPageLoading(false);
       };
       getAllPosts();
     }

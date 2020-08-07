@@ -21,13 +21,16 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
     // console.log(response);
-    setCurrentUser(response.find((x) => x.id === currentUser.id));
-    setUsers(users.map((user) => response.find((r) => r.id === user.id)));
+    // setCurrentUser(response.find((x) => x.id === currentUser.id));
+    // setUsers(users.map((user) => response.find((r) => r.id === user.id)));
 
     loading = [...loading];
     loading[index] = false;
     setIsLoadingFollow(loading);
     setIsLoadingDisabled(false);
+
+    setCurrentUser(response.find((x) => x.id === currentUser.id));
+    setUsers(users.map((user) => response.find((r) => r.id === user.id)));
   };
 
   return (
