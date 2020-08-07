@@ -29,6 +29,7 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
   };
 
   const handleCloseModal = () => {
+    console.log('huh');
     setShowModal(false);
   };
 

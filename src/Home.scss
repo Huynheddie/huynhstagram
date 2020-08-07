@@ -56,6 +56,19 @@ a:hover {
 	padding-left: 5px;
 }
 
+.post-content-long {
+	font-size: 14px;
+	padding-left: 35px;
+	overflow-wrap: anywhere;
+	padding-bottom: 5px;
+}
+
+.post-homepage-content-long {
+	font-size: 14px;
+	overflow-wrap: anywhere;
+	padding-right: 15px;
+}
+
 .post-comment {
 	width: 100%;
 	border: 0px;
@@ -66,6 +79,20 @@ a:hover {
 	font-size: 14px;
 	font-family: "Lato", "Helvetica Neue", "Arial", "Helvetica", "sans-serif";
 	color: rgba(0, 0, 0, 0.68);
+}
+
+.detailed-post-comment {
+	padding-left: 5px;
+}
+
+.detailed-post-comment-long {
+	padding-left: 35px;
+	overflow-wrap: anywhere;
+}
+
+.detailed-post-comment-mid {
+	padding-left: 35px;
+	padding-right: 35px;
 }
 
 .post-comment-display {
@@ -140,7 +167,7 @@ a:hover {
 }
 
 .detailed-comment-time {
-	padding-left: 39px;
+	padding-left: 35px;
 	font-size: 12px !important;
 }
 
@@ -158,6 +185,15 @@ a:hover {
 	margin-left: auto !important;
 }
 
+.comment-interact-icons-long {
+	padding-left: 10px;
+	margin-left: auto !important;
+}
+
+.comment-interact-icons-mid {
+	margin-left: auto !important;
+}
+
 .comment-like-icon {
 	position: inherit;
 	cursor: pointer;
@@ -172,6 +208,12 @@ a:hover {
 .detailed-comment-text:hover {
 	.comment-edit-icon {
 		display: inline-block !important;
+		position: relative;
+		// right: 40px;
+		// background-color: white;
+		// height: 40px;
+		// width: 20px;
+		// opacity: 0.9;
 	}
 }
 

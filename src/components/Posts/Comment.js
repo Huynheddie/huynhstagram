@@ -50,9 +50,14 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
         <UserProfileLink userId={comment.user.id} username={comment.user.username} />
       </Card.Content>
 
-      <Card.Content key={index + comment.comment} style={{ marginLeft: '5px', overflowWrap: 'anywhere' }}>{comment.comment}</Card.Content>
+      <Card.Content
+        key={index + comment.comment}
+        className={comment.comment.length < 18 ? 'detailed-post-comment' : comment.comment.length > 23 ? 'detailed-post-comment-long' : 'detailed-post-comment-mid'}
+      >{comment.comment}
+      </Card.Content>
+      { isDetailedPage && comment.comment.length >= 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta> }
+      <div className={comment.comment.length < 18 ? 'comment-interact-icons' : 'comment-interact-icons-long'}>
 
-      <div className='comment-interact-icons'>
         { loggedInUser.id === comment.user.id
             && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
 
@@ -65,7 +70,7 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
       { isDetailedPage
         && (
           <>
-            <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>
+            { comment.comment.length < 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
             {comment.likes.length > 0
             && (
             <Card.Content

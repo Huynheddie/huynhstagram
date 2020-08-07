@@ -10,9 +10,20 @@ const PostContent = ({ post, isDetailedPage }) => (
     <Card.Header className='post-subheader'>
       <UserProfileLink userId={post.user.id} username={post.user.username} />
     </Card.Header>
-    <Card.Description className='post-content'>
+
+    { isDetailedPage
+    && (
+    <Card.Description className={post.content.length < 25 ? 'post-content' : 'post-content-long'}>
       {post.content}
     </Card.Description>
+    )}
+
+    { !isDetailedPage && (
+    <Card.Description className={post.content.length < 65 ? 'post-content' : 'post-homepage-content-long'}>
+      {post.content}
+    </Card.Description>
+    )}
+
     { isDetailedPage
       && (
       <>

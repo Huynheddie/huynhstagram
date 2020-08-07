@@ -50,7 +50,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
           <div key={userObj.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
             <UserThumbnail profileImage={userObj.profileImage} color='ffffff' />
             <div>
-              <UserProfileLink userId={userObj.id} username={userObj.username} />
+              <UserProfileLink handleCloseModal={handleCloseModal} userId={userObj.id} username={userObj.username} />
               <p>{userObj.name}</p>
             </div>
             { userObj.id !== loggedInUser.id && (
