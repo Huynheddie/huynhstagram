@@ -13,7 +13,7 @@ const Notification = ({ message }) => {
         size='large'
         style={{ maxWidth: '60%' }}
       >
-        <Message.Header>Error: </Message.Header>
+        <Message.Header>Error</Message.Header>
         <Message.Content>
           {message}
         </Message.Content>

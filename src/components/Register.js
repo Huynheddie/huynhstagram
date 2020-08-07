@@ -16,6 +16,10 @@ const Register = ({ setErrorMessage }) => {
   const handleRegister = async (event) => {
     event.preventDefault();
     try {
+      if (password.length < 8) {
+        setErrorMessage('Password must be at least 8 characters long.');
+        return;
+      }
       setIsLoading(true);
       await userService.register({
         username, name, password,
@@ -34,7 +38,8 @@ const Register = ({ setErrorMessage }) => {
       setErrorMessage(null);
       history.push('/');
     } catch (error) {
-      setErrorMessage('Wrong credentials');
+      setErrorMessage('Username is already taken');
+      setIsLoading(false);
       setTimeout(() => {
         setErrorMessage(null);
       }, 5000);
