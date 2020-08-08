@@ -46,19 +46,28 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
       { loggedInUser && (
       <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
 
-        { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} /> }
-
-        <Card.Content key={index + comment.user.username} style={{ fontWeight: '700' }}>
-          <UserProfileLink userId={comment.user.id} username={comment.user.username} />
-        </Card.Content>
+        { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} color='fff' /> }
 
         <Card.Content
           key={index + comment.comment}
-          className={comment.comment.length < 18 ? 'detailed-post-comment' : comment.comment.length > 23 ? 'detailed-post-comment-long' : 'detailed-post-comment-mid'}
-        >{comment.comment}
+          className={isDetailedPage ? 'detailed-post-comment-long' : 'post-comment-long'}
+        >
+          <UserProfileLink style={{ fontWeight: '700' }} userId={comment.user.id} username={comment.user.username} />
+          {comment.comment}
         </Card.Content>
-        { isDetailedPage && comment.comment.length >= 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta> }
-        <div className={comment.comment.length < 18 ? 'comment-interact-icons' : 'comment-interact-icons-long'}>
+        { isDetailedPage
+          && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
+        { isDetailedPage && comment.likes.length > 0
+          && (
+          <Card.Content
+            style={{ fontSize: '12px', paddingLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
+            key={index}
+            onClick={() => handleOpenLikes(comment.likes)}
+          >
+            {comment.likes.length} likes
+          </Card.Content>
+          )}
+        <div className='comment-interact-icons-long'>
 
           { loggedInUser.id === comment.user.id
               && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
@@ -68,23 +77,6 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
             : <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart'} color={likeLoading[index] ? 'black' : 'red'} className='comment-like-icon' />}
         </div>
         <div style={{ flexBasis: '100%', height: '0' }}></div>
-
-        { isDetailedPage
-          && (
-            <>
-              { comment.comment.length < 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
-              {comment.likes.length > 0
-              && (
-              <Card.Content
-                style={{ fontSize: '12px', paddingLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
-                key={index}
-                onClick={() => handleOpenLikes(comment.likes)}
-              >
-                {comment.likes.length} likes
-              </Card.Content>
-              )}
-            </>
-          )}
 
         <Modal
           centered

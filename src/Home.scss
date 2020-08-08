@@ -53,20 +53,19 @@ a:hover {
 
 .post-content {
 	font-size: 14px;
-	padding-left: 5px;
+	// padding-left: 5px;
 }
 
 .post-content-long {
 	font-size: 14px;
-	padding-left: 35px;
 	overflow-wrap: anywhere;
 	padding-bottom: 5px;
+	width: 205px;
 }
 
 .post-homepage-content-long {
 	font-size: 14px;
 	overflow-wrap: anywhere;
-	padding-right: 15px;
 }
 
 .post-comment {
@@ -81,12 +80,16 @@ a:hover {
 	color: rgba(0, 0, 0, 0.68);
 }
 
+.post-comment-long {
+	overflow-wrap: anywhere;
+}
+
 .detailed-post-comment {
 	padding-left: 5px;
 }
 
 .detailed-post-comment-long {
-	padding-left: 35px;
+	width: 205px;
 	overflow-wrap: anywhere;
 }
 
@@ -186,7 +189,6 @@ a:hover {
 }
 
 .comment-interact-icons-long {
-	padding-left: 10px;
 	margin-left: auto !important;
 }
 

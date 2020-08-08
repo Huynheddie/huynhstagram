@@ -6,20 +6,24 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 
 const PostContent = ({ post, isDetailedPage }) => (
   <div className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
-    { isDetailedPage && <UserThumbnail profileImage={post.user.profileImage} /> }
-    <Card.Header className='post-subheader'>
-      <UserProfileLink userId={post.user.id} username={post.user.username} />
-    </Card.Header>
+    { isDetailedPage
+    && (
+    <div style={{ marginBottom: 'auto' }}>
+      <UserThumbnail profileImage={post.user.profileImage} color='fff' />
+    </div>
+    ) }
 
     { isDetailedPage
     && (
-    <Card.Description className={post.content.length < 25 ? 'post-content' : 'post-content-long'}>
+    <Card.Description className='post-content-long'>
+      <UserProfileLink userId={post.user.id} username={post.user.username} className='post-subheader' />
       {post.content}
     </Card.Description>
     )}
 
     { !isDetailedPage && (
-    <Card.Description className={post.content.length < 65 ? 'post-content' : 'post-homepage-content-long'}>
+    <Card.Description className='post-homepage-content-long'>
+      <UserProfileLink userId={post.user.id} username={post.user.username} className='post-subheader' />
       {post.content}
     </Card.Description>
     )}
