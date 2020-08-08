@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Card } from 'semantic-ui-react';
 import { Link } from 'react-router-dom';
 import commentService from '../../services/comments';
@@ -7,23 +7,38 @@ import Comment from './Comment';
 
 const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
-  const [likeLoading, setLikeLoading] = useState(false);
+  // const [likeLoading, setLikeLoading] = useState(false);
+  const [likeLoading, setLikeLoading] = useState([]);
+  const [likeDisabled, setLikeDisabled] = useState(false);
 
-  const handleCommentLike = async (postId, comment, likes) => {
-    setLikeLoading(true);
+  useEffect(() => {
+    setLikeLoading(post.comments.map(() => false));
+  }, []);
+
+  const handleCommentLike = async (postId, comment, likes, index) => {
+    let loading = [...likeLoading];
+    loading[index] = true;
+    setLikeLoading(loading);
+    setLikeDisabled(true);
+
     let response = null;
     if (likes.findIndex((like) => like.id === loggedInUser.id) === -1) {
       response = await commentService.addLike(loggedInUser.id, postId, comment._id);
     } else {
       response = await commentService.removeLike(loggedInUser.id, postId, comment._id);
     }
+
     console.log(response);
     if (isDetailedPage) {
       handleEditPost(response);
     } else {
       handleEditPost(postId, response);
     }
-    setLikeLoading(false);
+
+    loading = [...loading];
+    loading[index] = false;
+    setLikeLoading(loading);
+    setLikeDisabled(false);
   };
 
   return (
@@ -43,6 +58,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleEditPost={handleEditPost}
             key={index}
             likeLoading={likeLoading}
+            likeDisabled={likeDisabled}
           />
         ))}
 
@@ -56,6 +72,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleEditPost={handleEditPost}
             key={index}
             likeLoading={likeLoading}
+            likeDisabled={likeDisabled}
           />
         ))}
 
@@ -69,6 +86,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
             handleEditPost={handleEditPost}
             key={index}
             likeLoading={likeLoading}
+            likeDisabled={likeDisabled}
           />
         ))}
 

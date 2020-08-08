@@ -6,7 +6,7 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 import commentService from '../../services/comments';
 import UserLists from '../UserProfile/UserLists';
 
-const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, handleEditPost, likeLoading }) => {
+const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, handleEditPost, likeLoading, likeDisabled }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [showActionModal, setShowActionModal] = useState(false);
   const [removalLoading, setRemovalLoading] = useState(false);
@@ -42,74 +42,78 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
   };
 
   return (
-    <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
+    <>
+      { loggedInUser && (
+      <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
 
-      { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} /> }
+        { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} /> }
 
-      <Card.Content key={index + comment.user.username} style={{ fontWeight: '700' }}>
-        <UserProfileLink userId={comment.user.id} username={comment.user.username} />
-      </Card.Content>
+        <Card.Content key={index + comment.user.username} style={{ fontWeight: '700' }}>
+          <UserProfileLink userId={comment.user.id} username={comment.user.username} />
+        </Card.Content>
 
-      <Card.Content
-        key={index + comment.comment}
-        className={comment.comment.length < 18 ? 'detailed-post-comment' : comment.comment.length > 23 ? 'detailed-post-comment-long' : 'detailed-post-comment-mid'}
-      >{comment.comment}
-      </Card.Content>
-      { isDetailedPage && comment.comment.length >= 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta> }
-      <div className={comment.comment.length < 18 ? 'comment-interact-icons' : 'comment-interact-icons-long'}>
+        <Card.Content
+          key={index + comment.comment}
+          className={comment.comment.length < 18 ? 'detailed-post-comment' : comment.comment.length > 23 ? 'detailed-post-comment-long' : 'detailed-post-comment-mid'}
+        >{comment.comment}
+        </Card.Content>
+        { isDetailedPage && comment.comment.length >= 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta> }
+        <div className={comment.comment.length < 18 ? 'comment-interact-icons' : 'comment-interact-icons-long'}>
 
-        { loggedInUser.id === comment.user.id
-            && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
+          { loggedInUser.id === comment.user.id
+              && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
 
-        {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
-          ? <Icon loading={likeLoading} onClick={() => handleCommentLike(post.id, comment, comment.likes)} name={likeLoading ? 'spinner' : 'heart outline'} color='grey' className='comment-like-icon' />
-          : <Icon loading={likeLoading} onClick={() => handleCommentLike(post.id, comment, comment.likes)} name={likeLoading ? 'spinner' : 'heart'} color={likeLoading ? 'black' : 'red'} className='comment-like-icon' />}
+          {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
+            ? <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart outline'} color='grey' className='comment-like-icon' />
+            : <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart'} color={likeLoading[index] ? 'black' : 'red'} className='comment-like-icon' />}
+        </div>
+        <div style={{ flexBasis: '100%', height: '0' }}></div>
+
+        { isDetailedPage
+          && (
+            <>
+              { comment.comment.length < 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
+              {comment.likes.length > 0
+              && (
+              <Card.Content
+                style={{ fontSize: '12px', paddingLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
+                key={index}
+                onClick={() => handleOpenLikes(comment.likes)}
+              >
+                {comment.likes.length} likes
+              </Card.Content>
+              )}
+            </>
+          )}
+
+        <Modal
+          centered
+          open={showActionModal}
+          onClose={handleCloseModal}
+          size='tiny'
+          id='comment-edit-modal'
+        >
+          <Modal.Content onClick={!removalLoading ? handleRemoveComment : null} style={{ borderBottom: '1px solid #dbdbdb', cursor: 'pointer' }}>
+            { !removalLoading
+              ? <h3 style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
+              : (
+                <div style={{ height: '18px' }}>
+                  <Dimmer active inverted style={{ maxHeight: '61px' }}>
+                    <Loader inverted />
+                  </Dimmer>
+                </div>
+              )}
+          </Modal.Content>
+          <Modal.Content onClick={handleCloseModal} style={{ cursor: 'pointer' }}>
+            <h3 style={{ fontWeight: '400' }} className='comment-edit-options'>Cancel</h3>
+          </Modal.Content>
+        </Modal>
+
+        <UserLists open={showLikeModal} handleCloseModal={handleCloseLikeModal} userList={userList} listType='Likes' setUserList={setUserList} />
+
       </div>
-      <div style={{ flexBasis: '100%', height: '0' }}></div>
-
-      { isDetailedPage
-        && (
-          <>
-            { comment.comment.length < 18 && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
-            {comment.likes.length > 0
-            && (
-            <Card.Content
-              style={{ fontSize: '12px', paddingLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
-              key={index}
-              onClick={() => handleOpenLikes(comment.likes)}
-            >
-              {comment.likes.length} likes
-            </Card.Content>
-            )}
-          </>
-        )}
-
-      <Modal
-        centered
-        open={showActionModal}
-        onClose={handleCloseModal}
-        size='tiny'
-        id='comment-edit-modal'
-      >
-        <Modal.Content onClick={!removalLoading ? handleRemoveComment : null} style={{ borderBottom: '1px solid #dbdbdb', cursor: 'pointer' }}>
-          { !removalLoading
-            ? <h3 style={{ color: '#ed4956' }} className='comment-edit-options'>Delete</h3>
-            : (
-              <div style={{ height: '18px' }}>
-                <Dimmer active inverted style={{ maxHeight: '61px' }}>
-                  <Loader inverted />
-                </Dimmer>
-              </div>
-            )}
-        </Modal.Content>
-        <Modal.Content onClick={handleCloseModal} style={{ cursor: 'pointer' }}>
-          <h3 style={{ fontWeight: '400' }} className='comment-edit-options'>Cancel</h3>
-        </Modal.Content>
-      </Modal>
-
-      <UserLists open={showLikeModal} handleCloseModal={handleCloseLikeModal} userList={userList} listType='Likes' setUserList={setUserList} />
-
-    </div>
+      )}
+    </>
   );
 };
 

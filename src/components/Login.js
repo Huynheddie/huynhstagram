@@ -23,9 +23,6 @@ const Login = ({ setErrorMessage }) => {
       history.push('/');
     } catch (exception) {
       setErrorMessage('Wrong credentials');
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 

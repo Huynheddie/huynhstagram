@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { BrowserRouter as Router, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Switch, useHistory, withRouter } from 'react-router-dom';
 import './Home.scss';
 import NavMenu from './components/NavMenu';
 import Login from './components/Login';
@@ -17,6 +17,7 @@ import DetailedPost from './components/DetailedPost/DetailedPost';
 const App = () => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [errorMessage, setErrorMessage] = useState(null);
+  const history = useHistory();
 
   useEffect(() => {
     if (loggedInUser) {
@@ -24,6 +25,7 @@ const App = () => {
       // Require login after an hour
       if (currentTime - new Date(loggedInUser.lastLogin) >= 3600000) {
         localStorage.removeItem('loggedInUser');
+        history.push('/');
       } else {
         const userCredentials = loggedInUser;
         postService.setToken(userCredentials.token);
@@ -76,10 +78,8 @@ const App = () => {
         </Switch>
       </Router>
 
-      {/* <ReduxStuff /> */}
-
     </div>
   );
 };
 
-export default App;
+export default withRouter(App);

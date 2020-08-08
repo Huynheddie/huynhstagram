@@ -40,9 +40,6 @@ const Register = ({ setErrorMessage }) => {
     } catch (error) {
       setErrorMessage('Username is already taken');
       setIsLoading(false);
-      setTimeout(() => {
-        setErrorMessage(null);
-      }, 5000);
     }
   };
 

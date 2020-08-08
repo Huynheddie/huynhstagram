@@ -29,7 +29,6 @@ const Home = () => {
   useEffect(() => {
     if (currentUser) {
       const getAllPosts = async () => {
-        console.log('getting');
         setPageLoading(true);
         const allPosts = await postService.getAllPosts();
         setPosts(allPosts
