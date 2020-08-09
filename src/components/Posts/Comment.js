@@ -48,34 +48,47 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
 
         { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} color='fff' /> }
 
-        <Card.Content
-          key={index + comment.comment}
-          className={isDetailedPage ? 'detailed-post-comment-long' : 'post-comment-long'}
-        >
-          <UserProfileLink style={{ fontWeight: '700' }} userId={comment.user.id} username={comment.user.username} />
-          {comment.comment}
-        </Card.Content>
-        { isDetailedPage
-          && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
-        { isDetailedPage && comment.likes.length > 0
-          && (
-          <Card.Content
-            style={{ fontSize: '12px', paddingLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
-            key={index}
-            onClick={() => handleOpenLikes(comment.likes)}
-          >
-            {comment.likes.length} likes
-          </Card.Content>
-          )}
-        <div className='comment-interact-icons-long'>
+        <div className={isDetailedPage ? 'detailed-post-comment-text-like-box' : 'regular-post-comment-text-like-box'}>
+          <div style={{ overflowWrap: 'anywhere' }}>
+            <Card.Content
+              key={index + comment.comment}
+              // className={isDetailedPage ? 'detailed-post-comment-long' : 'post-comment-long'}
+            >
+              <UserProfileLink style={{ fontWeight: '700' }} userId={comment.user.id} username={comment.user.username} />
+              {comment.comment}
+            </Card.Content>
 
-          { loggedInUser.id === comment.user.id
-              && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
+            <div style={{ display: 'flex', marginTop: '5px' }}>
+              {/* Date */}
+              { isDetailedPage
+                && <Card.Meta key={index + comment.date.toString()} className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(comment.date)}</Card.Meta>}
 
-          {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
-            ? <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart outline'} color='grey' className='comment-like-icon' />
-            : <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart'} color={likeLoading[index] ? 'black' : 'red'} className='comment-like-icon' />}
+              {/* Likes */}
+              { isDetailedPage && comment.likes.length > 0
+                && (
+                <Card.Content
+                  style={{ fontSize: '12px', marginLeft: '10px', color: '#8e8e8e', fontWeight: '600', cursor: 'pointer' }}
+                  key={index}
+                  onClick={() => handleOpenLikes(comment.likes)}
+                >
+                  {comment.likes.length} likes
+                </Card.Content>
+                )}
+            </div>
+          </div>
+
+          {/* Edit and Like Button */}
+          <div className='comment-interact-icons' style={{ marginTop: 'auto', marginBottom: 'auto' }}>
+
+            { loggedInUser.id === comment.user.id
+                && <Icon onClick={() => setShowActionModal(true)} color='grey' name='ellipsis horizontal' className='comment-edit-icon' />}
+
+            {comment.likes.findIndex((like) => like.id === loggedInUser.id) === -1
+              ? <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart outline'} color='grey' className='comment-like-icon' />
+              : <Icon disabled={likeDisabled} loading={likeLoading[index]} onClick={() => handleCommentLike(post.id, comment, comment.likes, index)} name={likeLoading[index] ? 'spinner' : 'heart'} color={likeLoading[index] ? 'black' : 'red'} className='comment-like-icon' />}
+          </div>
         </div>
+
         <div style={{ flexBasis: '100%', height: '0' }}></div>
 
         <Modal

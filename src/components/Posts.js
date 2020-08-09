@@ -54,7 +54,7 @@ const Posts = ({ pageLoading, posts, handleDeletePost, handleEditPost }) => {
 
           <PostInteractions post={post} handleEditPost={handleEditPost} />
 
-          <Card.Content style={{ borderTop: '0px', paddingBottom: '0px' }}>
+          <Card.Content style={{ borderTop: '0px', paddingTop: '5px', paddingBottom: '5px' }}>
             <Card.Header
               className='post-subheader'
               onClick={() => handleOpenLikes(post.likes)}

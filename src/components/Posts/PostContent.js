@@ -18,6 +18,7 @@ const PostContent = ({ post, isDetailedPage }) => (
     <Card.Description className='post-content-long'>
       <UserProfileLink userId={post.user.id} username={post.user.username} className='post-subheader' />
       {post.content}
+      <Card.Meta className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(post.date)}</Card.Meta>
     </Card.Description>
     )}
 
@@ -27,14 +28,6 @@ const PostContent = ({ post, isDetailedPage }) => (
       {post.content}
     </Card.Description>
     )}
-
-    { isDetailedPage
-      && (
-      <>
-        <div style={{ flexBasis: '100%', height: '0' }}></div>
-        <Card.Meta className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(post.date)}</Card.Meta>
-      </>
-      )}
   </div>
 );
 

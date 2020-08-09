@@ -66,6 +66,7 @@ a:hover {
 .post-homepage-content-long {
 	font-size: 14px;
 	overflow-wrap: anywhere;
+	padding-bottom: 5px;
 }
 
 .post-comment {
@@ -103,13 +104,12 @@ a:hover {
 	flex-wrap: wrap;
 	align-items: center;
 	padding-left: 0px;
-	padding-bottom: 5px;
 }
 
 .post-comment-content {
 	padding-left: 14px !important;
 	padding-top: 5px !important;
-	padding-bottom: 5px !important;
+	padding-bottom: 0px !important;
 }
 
 .more-options:hover {
@@ -158,7 +158,7 @@ a:hover {
 	padding-bottom: 0;
 	padding-left: 16px;
 	flex-grow: 1;
-	max-height: 300px;
+	max-height: 400px;
 	overflow: auto;
 }
 
@@ -167,10 +167,11 @@ a:hover {
 	flex-wrap: wrap;
 	align-items: center;
 	padding-bottom: 10px;
+	max-width: 250px;
 }
 
 .detailed-comment-time {
-	padding-left: 35px;
+	// padding-left: 35px;
 	font-size: 12px !important;
 }
 
@@ -186,36 +187,31 @@ a:hover {
 
 .comment-interact-icons {
 	margin-left: auto !important;
-}
-
-.comment-interact-icons-long {
-	margin-left: auto !important;
-}
-
-.comment-interact-icons-mid {
-	margin-left: auto !important;
+	position: relative;
 }
 
 .comment-like-icon {
 	position: inherit;
 	cursor: pointer;
+	margin-left: 5px !important;
 }
 
 .comment-edit-icon {
 	cursor: pointer;
 	display: none !important;
-	margin-right: 10px !important;
+	// margin-right: 10px !important;
 }
 
 .detailed-comment-text:hover {
 	.comment-edit-icon {
-		display: inline-block !important;
-		position: relative;
-		// right: 40px;
-		// background-color: white;
-		// height: 40px;
-		// width: 20px;
-		// opacity: 0.9;
+		display: block !important;
+		// width: 100%;
+		position: absolute;
+		right: 20px;
+		background-color: white;
+		height: 20px;
+		width: 30px;
+		opacity: 0.85;
 	}
 }
 
@@ -425,6 +421,16 @@ a:hover {
 .zero-posts {
 	width: 100% !important;
 	margin-top: 20% !important;
+}
+
+.detailed-post-comment-text-like-box {
+	display: flex !important;
+	width: 85% !important;
+}
+
+.regular-post-comment-text-like-box {
+	display: flex !important;
+	width: 100%;
 }
 
 // .counter-card {

@@ -91,7 +91,7 @@ const PostComments = ({ post, isDetailedPage, handleEditPost }) => {
         ))}
 
         { !isDetailedPage && post.comments.length >= 4 && (
-        <Link to={`/post/${post.id}`} style={{ color: '#8e8e8e', fontSize: '14px' }}>
+        <Link to={`/post/${post.id}`} style={{ color: '#8e8e8e', fontSize: '14px', paddingBottom: '5px' }}>
           <p>View all {post.comments.length} comments</p>
         </Link>
         )}
