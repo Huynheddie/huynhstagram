@@ -8,7 +8,7 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 const PostHeader = ({ post, index, isDetailedPage, handleOpenModal, handleDeletePost }) => (
   <Menu borderless fluid icon id={isDetailedPage ? 'detailed-post-header' : ''} style={{ borderRadius: '0px' }}>
     <Menu.Item style={{ paddingRight: isDetailedPage ? '0' : '' }}>
-      <UserThumbnail profileImage={post.user.profileImage} />
+      <UserThumbnail userId={post.user.id} profileImage={post.user.profileImage} />
     </Menu.Item>
 
     <Menu.Item style={{ paddingLeft: '0' }}>

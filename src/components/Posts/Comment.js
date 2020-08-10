@@ -20,7 +20,6 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
   const handleRemoveComment = async () => {
     setRemovalLoading(true);
     const response = await commentService.removeComment(post.id, comment._id);
-    // console.log(response);
     handleEditPost(response);
     setRemovalLoading(false);
   };
@@ -36,7 +35,6 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
   };
 
   const handleOpenLikes = (likes) => {
-    console.log(likes);
     setUserList(likes);
     setShowLikeModal(true);
   };
@@ -46,7 +44,7 @@ const Comment = ({ comment, post, isDetailedPage, index, handleCommentLike, hand
       { loggedInUser && (
       <div key={index} className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
 
-        { isDetailedPage && <UserThumbnail profileImage={comment.user.profileImage} color='fff' /> }
+        { isDetailedPage && <UserThumbnail userId={comment.user.id} profileImage={comment.user.profileImage} color='fff' /> }
 
         <div className={isDetailedPage ? 'detailed-post-comment-text-like-box' : 'regular-post-comment-text-like-box'}>
           <div style={{ overflowWrap: 'anywhere' }}>

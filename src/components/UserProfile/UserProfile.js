@@ -32,8 +32,6 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (user && userPosts) {
-      // console.log('User:', user);
-      // console.log('User Posts: ', userPosts);
       setPageLoading(false);
     }
   }, [user, userPosts]);

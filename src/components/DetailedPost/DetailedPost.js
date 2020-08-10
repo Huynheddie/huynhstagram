@@ -23,12 +23,10 @@ const DetailedPost = () => {
   };
 
   const handleDeletePost = (deletePost) => {
-    console.log('Request to delete post:', deletePost);
     history.push('/');
   };
 
   const handleOpenLikes = (likes) => {
-    console.log(likes);
     setUserList(likes);
     setShowLikeModal(true);
   };
@@ -36,7 +34,6 @@ const DetailedPost = () => {
   useEffect(() => {
     const getPost = async () => {
       const response = await postService.getSpecificPost(id);
-      console.log(response);
       setPost(response);
       setPageLoading(false);
     };

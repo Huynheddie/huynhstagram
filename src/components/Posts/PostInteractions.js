@@ -12,7 +12,6 @@ const PostInteractions = ({ isDetailedPage, post, handleEditPost, focus, setInpu
     setLoading(true);
     const response = await postService.modifyLike(postId, loggedInUser.id);
     if (response) {
-      console.log(response);
       if (isDetailedPage) {
         handleEditPost(response);
       } else {
@@ -41,14 +40,6 @@ const PostInteractions = ({ isDetailedPage, post, handleEditPost, focus, setInpu
       <Menu.Item onClick={handleComment}>
         <Icon name='comment outline' size='large' style={{ cursor: 'pointer' }} />
       </Menu.Item>
-
-      {/* <Menu.Item>
-        <Icon name='paper plane outline' size='large' style={{ cursor: 'pointer' }} />
-      </Menu.Item>
-
-      <Menu.Item position='right'>
-        <Icon name='bookmark outline' size='large' style={{ cursor: 'pointer' }} />
-      </Menu.Item> */}
 
     </Menu>
   );

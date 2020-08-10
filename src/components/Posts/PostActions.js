@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
-import { Dropdown, Confirm } from 'semantic-ui-react';
+import { Dropdown, Modal, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import postService from '../../services/posts';
 
 const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDeletePost }) => {
   const history = useHistory();
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
 
   const handleDelete = async (id) => {
+    setDeleteLoading(true);
     await postService.deletePost(id);
     if (isDetailedPage) {
       handleDeletePost();
@@ -15,6 +17,10 @@ const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDelet
       await handleDeletePost(id);
     }
     history.push('/');
+  };
+
+  const handleCloseDelete = () => {
+    setShowDelete(false);
   };
 
   return (
@@ -35,17 +41,27 @@ const PostActions = ({ isDetailedPage, post, index, handleOpenModal, handleDelet
           <Dropdown.Item
             icon='trash alternate outline'
             text='Remove'
-            onClick={() => setShowConfirm(true)}
+            onClick={() => setShowDelete(true)}
           />
         </Dropdown.Menu>
       </Dropdown>
 
-      <Confirm
-        open={showConfirm}
-        confirmButton='Delete'
-        onCancel={() => setShowConfirm(false)}
-        onConfirm={() => handleDelete(post.id)}
-      />
+      <Modal
+        centered
+        size='small'
+        open={showDelete}
+        onClose={handleCloseDelete}
+        closeOnDimmerClick
+        closeOnDocumentClick
+        closeOnEscape
+      >
+        <Modal.Content>
+          <h3>Are you sure you want to delete this post?</h3>
+          <Button loading={deleteLoading} onClick={() => handleDelete(post.id)} color='instagram' style={{ float: 'right' }}>Delete</Button>
+          <Button disabled={deleteLoading} onClick={handleCloseDelete} color='red'>Cancel</Button>
+        </Modal.Content>
+
+      </Modal>
 
     </>
   );

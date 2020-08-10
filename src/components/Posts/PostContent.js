@@ -7,7 +7,7 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 const PostContent = ({ post, isDetailedPage }) => (
   <div className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
     { isDetailedPage
-      && <UserThumbnail profileImage={post.user.profileImage} color='fff' />}
+      && <UserThumbnail userId={post.user.id} profileImage={post.user.profileImage} color='fff' />}
 
     { isDetailedPage
     && (

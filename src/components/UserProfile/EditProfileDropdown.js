@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Dropdown, Modal, Confirm, Input, Form, Button } from 'semantic-ui-react';
+import { Dropdown, Modal, Input, Form, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import UpdateProfilePicture from './UpdateProfilePicture';
 import userService from '../../services/user';
@@ -8,7 +8,8 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
   const [showUpdateBio, setShowUpdateBio] = useState(false);
   const [showUpdatePictureModal, setShowUpdatePictureModal] = useState(false);
-  const [showConfirm, setShowConfirm] = useState(false);
+  const [showDelete, setShowDelete] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [newBio, setNewBio] = useState(userBio);
   const [newBioLoading, setNewBioLoading] = useState(false);
   const history = useHistory();
@@ -18,9 +19,13 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
     setShowUpdateBio(false);
   };
 
+  const handleCloseDelete = () => {
+    setShowDelete(false);
+  };
+
   const handleDeleteUser = async () => {
+    setDeleteLoading(true);
     const response = await userService.deleteUser(loggedInUser.id);
-    console.log(response);
     localStorage.removeItem('loggedInUser');
     history.push('/');
   };
@@ -46,7 +51,7 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
         <Dropdown.Menu>
           <Dropdown.Item text='Change Biography' onClick={() => setShowUpdateBio(true)} />
           <Dropdown.Item text='Change Profile Picture' onClick={() => setShowUpdatePictureModal(true)} />
-          <Dropdown.Item text='Delete Account' onClick={() => setShowConfirm(true)} />
+          <Dropdown.Item text='Delete Account' onClick={() => setShowDelete(true)} />
         </Dropdown.Menu>
       </Dropdown>
 
@@ -92,11 +97,23 @@ const EditProfileDropdown = ({ userBio, setUser }) => {
         </Modal.Content>
       </Modal>
 
-      <Confirm
-        open={showConfirm}
-        onCancel={() => setShowConfirm(false)}
-        onConfirm={handleDeleteUser}
-      />
+      <Modal
+        centered
+        size='small'
+        open={showDelete}
+        onClose={handleCloseDelete}
+        closeOnDimmerClick
+        closeOnDocumentClick
+        closeOnEscape
+      >
+        <Modal.Content>
+          <h3>Are you sure you want to delete your account?</h3>
+          <Button loading={deleteLoading} onClick={handleDeleteUser} color='instagram' style={{ float: 'right' }}>Delete</Button>
+          <Button disabled={deleteLoading} onClick={handleCloseDelete} color='red'>Cancel</Button>
+        </Modal.Content>
+
+      </Modal>
+
     </>
   );
 };

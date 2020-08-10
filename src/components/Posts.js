@@ -31,7 +31,6 @@ const Posts = ({ pageLoading, posts, handleDeletePost, handleEditPost }) => {
   };
 
   const handleOpenLikes = (likes) => {
-    console.log(likes);
     setUserList(likes);
     setShowLikeModal(true);
   };

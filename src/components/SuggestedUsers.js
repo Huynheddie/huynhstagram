@@ -20,9 +20,6 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
     setIsLoadingDisabled(true);
 
     const response = await userService.followOtherUser(loggedInUser.id, targetUserId);
-    // console.log(response);
-    // setCurrentUser(response.find((x) => x.id === currentUser.id));
-    // setUsers(users.map((user) => response.find((r) => r.id === user.id)));
 
     loading = [...loading];
     loading[index] = false;
@@ -36,7 +33,7 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
   return (
     <Grid.Column width='2' id='suggest-div'>
       <div className='suggest-wrapper'>
-        <UserThumbnail profileImage={currentUser.profileImage} width={75} height={75} />
+        <UserThumbnail userId={currentUser.id} profileImage={currentUser.profileImage} width={75} height={75} />
         <div className='suggest-header'>
           <h5 style={{ marginTop: '0', marginBottom: '0' }}>{currentUser.username}</h5>
           <p style={{ marginTop: '0', color: '#8e8e8e' }}>{currentUser.name}</p>
@@ -46,7 +43,7 @@ const SuggestedUsers = ({ currentUser, setCurrentUser, users, setUsers }) => {
       <h3 className='suggestion-text-header'>Suggestions For You</h3>
       {users.map((user, index) => (
         <div key={user.id} className='suggestion-map-div'>
-          <UserThumbnail profileImage={user.profileImage} width={35} height={35} />
+          <UserThumbnail userId={user.id} profileImage={user.profileImage} width={35} height={35} />
           <UserProfileLink userId={user.id} username={user.username} />
           <Button
             basic

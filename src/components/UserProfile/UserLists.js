@@ -48,7 +48,7 @@ const UserLists = ({ open, handleCloseModal, userList, listType, user, setUser, 
       <Modal.Content>
         {userList.map((userObj, index) => (
           <div key={userObj.id} style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-            <UserThumbnail profileImage={userObj.profileImage} color='ffffff' />
+            <UserThumbnail userId={userObj.id} profileImage={userObj.profileImage} color='ffffff' />
             <div>
               <UserProfileLink handleCloseModal={handleCloseModal} userId={userObj.id} username={userObj.username} />
               <p>{userObj.name}</p>

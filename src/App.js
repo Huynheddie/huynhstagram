@@ -1,11 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Switch, useHistory, withRouter } from 'react-router-dom';
 import './Home.scss';
 import NavMenu from './components/NavMenu';
 import Login from './components/Login';
-import Notification from './components/Notification';
 import CreatePost from './components/CreatePostCard';
-// import ReduxStuff from './components/ReduxStuff';
 import PrivateRoute from './components/PrivateRoute';
 import PublicRoute from './components/PublicRoute';
 import UserProfile from './components/UserProfile/UserProfile';
@@ -16,7 +14,6 @@ import DetailedPost from './components/DetailedPost/DetailedPost';
 
 const App = () => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
-  const [errorMessage, setErrorMessage] = useState(null);
   const history = useHistory();
 
   useEffect(() => {
@@ -41,17 +38,11 @@ const App = () => {
         <Switch>
           <PublicRoute
             component={Login}
-            data={{
-              setErrorMessage,
-            }}
             path='/login'
           />
 
           <PublicRoute
             component={Register}
-            data={{
-              setErrorMessage,
-            }}
             path='/register'
           />
 

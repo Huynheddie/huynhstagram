@@ -10,11 +10,11 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
   const [userList, setUserList] = useState([]);
   const [listType, setListType] = useState();
 
-  useEffect(() => {
-    if (userList.length) {
-      console.log('UserList:', userList);
-    }
-  }, [userList]);
+  // useEffect(() => {
+  //   if (userList.length) {
+  //     console.log('UserList:', userList);
+  //   }
+  // }, [userList]);
 
   const handleOpenFollowers = () => {
     setListType('Followers');
@@ -29,7 +29,6 @@ const UserProfileHeader = ({ user, userPosts, setUser }) => {
   };
 
   const handleCloseModal = () => {
-    console.log('huh');
     setShowModal(false);
   };
 

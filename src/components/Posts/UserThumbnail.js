@@ -2,19 +2,22 @@ import React from 'react';
 import CloudinaryContext from 'cloudinary-react/lib/components/CloudinaryContext';
 import Image from 'cloudinary-react/lib/components/Image';
 import Transformation from 'cloudinary-react/lib/components/Transformation';
+import { Link } from 'react-router-dom';
 
-const UserThumbnail = ({ profileImage, width, height, color }) => (
+const UserThumbnail = ({ userId, profileImage, width, height, color }) => (
   <>
     <CloudinaryContext cloudName='huynhstagram'>
-      <Image publicId={profileImage} className='comment-profile-image'>
-        <Transformation
-          width={width || '30'}
-          height={height || '30'}
-          crop='thumb'
-          radius='max'
-          background={color ? `rgb:${color}` : 'rgb:fafafa'}
-        />
-      </Image>
+      <Link to={`/user/${userId}`}>
+        <Image publicId={profileImage} className='comment-profile-image'>
+          <Transformation
+            width={width || '30'}
+            height={height || '30'}
+            crop='thumb'
+            radius='max'
+            background={color ? `rgb:${color}` : 'rgb:fafafa'}
+          />
+        </Image>
+      </Link>
     </CloudinaryContext>
   </>
 );
