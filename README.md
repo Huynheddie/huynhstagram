@@ -23,6 +23,6 @@ An Instagram web-application clone where users can create and interact with post
 ## Images
 
 ### Login and Register Page
-
 ![Image](images/login.JPG)
+
 ![Image](images/register.JPG)
