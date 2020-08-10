@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Grid } from 'semantic-ui-react';
+import { Grid, Dimmer, Loader } from 'semantic-ui-react';
 import { useParams, useHistory } from 'react-router-dom';
 import DetailedPostImage from './DetailedPostImage';
 import DetailedPostText from './DetailedPostText';
@@ -11,6 +11,7 @@ const DetailedPost = () => {
   const [post, setPost] = useState(null);
   const [showLikeModal, setShowLikeModal] = useState(false);
   const [userList, setUserList] = useState([]);
+  const [pageLoading, setPageLoading] = useState(true);
   const history = useHistory();
 
   const handleCloseLikeModal = () => {
@@ -37,13 +38,14 @@ const DetailedPost = () => {
       const response = await postService.getSpecificPost(id);
       console.log(response);
       setPost(response);
+      setPageLoading(false);
     };
     getPost();
   }, []);
 
   return (
     <>
-      { post && (
+      { !pageLoading && post && (
       <Grid columns='2' centered>
         <Grid.Row className='grid-row'>
 
@@ -60,6 +62,14 @@ const DetailedPost = () => {
 
       </Grid>
 
+      )}
+
+      {pageLoading && (
+      <>
+        <Dimmer active inverted>
+          <Loader inverted size='huge' />
+        </Dimmer>
+      </>
       )}
     </>
   );

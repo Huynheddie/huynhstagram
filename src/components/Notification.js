@@ -7,11 +7,11 @@ const Notification = ({ message }) => {
   }
 
   return (
-    <Grid centered style={{ paddingTop: '1.5rem', marginBottom: '1rem' }}>
+    <Grid centered style={{ marginTop: '-6%', paddingTop: '1.5rem', marginBottom: '1rem' }}>
       <Message
         color='red'
         size='large'
-        style={{ maxWidth: '60%' }}
+        style={{ width: '30%' }}
       >
         <Message.Header>Error</Message.Header>
         <Message.Content>

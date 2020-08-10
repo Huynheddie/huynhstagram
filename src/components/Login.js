@@ -3,11 +3,13 @@ import { Card, Form, Input, Button } from 'semantic-ui-react';
 import { useHistory } from 'react-router-dom';
 import loginService from '../services/login';
 import postService from '../services/posts';
+import Notification from './Notification';
 
-const Login = ({ setErrorMessage }) => {
+const Login = () => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const history = useHistory();
 
   const handleLogin = async (event) => {
@@ -31,6 +33,7 @@ const Login = ({ setErrorMessage }) => {
 
   return (
     <div style={{ height: '100%', padding: '7%' }}>
+      <Notification message={errorMessage} />
       <Card centered>
         <Card.Content>
           <h2>Login</h2>

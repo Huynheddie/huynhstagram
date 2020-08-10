@@ -4,13 +4,15 @@ import { useHistory } from 'react-router-dom';
 import userService from '../services/user';
 import loginService from '../services/login';
 import postService from '../services/posts';
+import Notification from './Notification';
 
-const Register = ({ setErrorMessage }) => {
+const Register = () => {
   const history = useHistory();
   const [name, setFullName] = useState('');
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [errorMessage, setErrorMessage] = useState(null);
   const maxLength = 14;
 
   const handleRegister = async (event) => {
@@ -50,6 +52,7 @@ const Register = ({ setErrorMessage }) => {
 
   return (
     <div style={{ height: '100%', paddingTop: '6.5%' }}>
+      <Notification message={errorMessage} />
       <Card centered>
         <Card.Content>
           <h2>Register</h2>

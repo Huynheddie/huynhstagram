@@ -38,7 +38,6 @@ const App = () => {
     <div style={{ height: '100%' }}>
       <Router>
         <NavMenu />
-        <Notification message={errorMessage} />
         <Switch>
           <PublicRoute
             component={Login}
