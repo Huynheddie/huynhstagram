@@ -7,10 +7,12 @@ import postService from '../services/posts';
 const Login = ({ setErrorMessage }) => {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
   const history = useHistory();
 
   const handleLogin = async (event) => {
     event.preventDefault();
+    setLoading(true);
     try {
       const user = await loginService.login({
         username, password,
@@ -23,6 +25,7 @@ const Login = ({ setErrorMessage }) => {
       history.push('/');
     } catch (exception) {
       setErrorMessage('Wrong credentials');
+      setLoading(false);
     }
   };
 
@@ -44,7 +47,7 @@ const Login = ({ setErrorMessage }) => {
             </Form.Field>
 
             <div>
-              <Button type='submit' fluid style={{ backgroundColor: '#0095f6', color: 'white' }}>Submit</Button>
+              <Button loading={loading} type='submit' fluid style={{ backgroundColor: '#0095f6', color: 'white' }}>Submit</Button>
             </div>
 
           </Form>
