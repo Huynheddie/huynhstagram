@@ -49,35 +49,44 @@ const Register = ({ setErrorMessage }) => {
   };
 
   return (
-    <Card centered>
-      <Card.Content>
-        <h2>Register</h2>
-        <Form onSubmit={handleRegister}>
-          <Form.Field>
-            <label htmlFor='name-input'>Full name</label>
-            <Input id='name-input' value={name} onChange={({ target }) => setFullName(target.value)} />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor='username-input'>Username</label>
-            <Input id='username-input' value={username} onChange={handleChangeUsername} />
-          </Form.Field>
-          <Form.Field>
-            <label htmlFor='password-input'>Password</label>
-            <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
-          </Form.Field>
-          <div>
-            <Button
-              type='submit'
-              loading={isLoading}
-              disabled={isLoading}
-              fluid
-              style={{ backgroundColor: '#0095f6', color: 'white' }}
-            >Submit
-            </Button>
-          </div>
-        </Form>
-      </Card.Content>
-    </Card>
+    <div style={{ height: '100%', paddingTop: '6.5%' }}>
+      <Card centered>
+        <Card.Content>
+          <h2>Register</h2>
+          <Form onSubmit={handleRegister}>
+            <Form.Field>
+              <label htmlFor='name-input'>Full name</label>
+              <Input id='name-input' value={name} onChange={({ target }) => setFullName(target.value)} />
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor='username-input'>Username</label>
+              <Input id='username-input' value={username} onChange={handleChangeUsername} />
+            </Form.Field>
+            <Form.Field>
+              <label htmlFor='password-input'>Password</label>
+              <Input id='password-input' type='password' value={password} onChange={({ target }) => setPassword(target.value)} />
+            </Form.Field>
+            <div>
+              <Button
+                type='submit'
+                loading={isLoading}
+                disabled={isLoading}
+                fluid
+                style={{ backgroundColor: '#0095f6', color: 'white' }}
+              >Submit
+              </Button>
+            </div>
+          </Form>
+        </Card.Content>
+      </Card>
+
+      <Card centered>
+        <Card.Content style={{ display: 'flex', justifyContent: 'center' }}>
+          <p style={{ margin: 0 }}>Already have an account?</p>
+          <a href='/login' style={{ margin: '0px 0px 0px 5px', fontWeight: '600', color: '#0095f6' }}>Sign In</a>
+        </Card.Content>
+      </Card>
+    </div>
   );
 };
 

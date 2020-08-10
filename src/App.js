@@ -35,7 +35,7 @@ const App = () => {
   }, [loggedInUser]);
 
   return (
-    <div style={{ marginBottom: '20px' }}>
+    <div style={{ height: '100%' }}>
       <Router>
         <NavMenu />
         <Notification message={errorMessage} />

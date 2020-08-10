@@ -5,6 +5,7 @@ import userService from '../services/user';
 import postService from '../services/posts';
 import SuggestedUsers from './SuggestedUsers';
 import ZeroPosts from './ZeroPosts';
+import postHelper from '../utils/postHelper';
 
 const Home = () => {
   const loggedInUser = JSON.parse(window.localStorage.getItem('loggedInUser'));
@@ -16,9 +17,9 @@ const Home = () => {
   useEffect(() => {
     const getAllUsers = async () => {
       let response = await userService.getAllUsers();
-      response = response.filter((user) => user.followers.findIndex((follower) => follower.id === loggedInUser.id) === -1).slice(0, 5);
+      response = response.filter((user) => user.followers.findIndex((follower) => follower.id === loggedInUser.id) === -1 && user.id !== loggedInUser.id);
       console.log('Users:', response);
-      setUsers(response);
+      setUsers(postHelper.shuffle(response).slice(0, 5));
       response = await userService.getUser(loggedInUser.id);
       setCurrentUser(response);
     };

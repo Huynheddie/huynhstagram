@@ -7,6 +7,10 @@ body {
 	background-color: #fafafa !important;
 }
 
+#root {
+	height: 100%;
+}
+
 body {
 	padding-top: 80px !important;
 }
@@ -60,7 +64,6 @@ a:hover {
 	font-size: 14px;
 	overflow-wrap: anywhere;
 	padding-bottom: 5px;
-	width: 205px;
 }
 
 .post-homepage-content-long {
@@ -158,7 +161,7 @@ a:hover {
 	padding-bottom: 0;
 	padding-left: 16px;
 	flex-grow: 1;
-	max-height: 400px;
+	max-height: 600px;
 	overflow: auto;
 }
 
@@ -431,6 +434,13 @@ a:hover {
 .regular-post-comment-text-like-box {
 	display: flex !important;
 	width: 100%;
+}
+
+.grid-row {
+	margin-bottom: 30px;
+	height: 60%;
+	width: 100% !important;
+	max-width: 1200px;
 }
 
 // .counter-card {

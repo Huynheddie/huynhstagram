@@ -27,7 +27,7 @@ const Login = ({ setErrorMessage }) => {
   };
 
   return (
-    <>
+    <div style={{ height: '100%', padding: '7%' }}>
       <Card centered>
         <Card.Content>
           <h2>Login</h2>
@@ -57,7 +57,7 @@ const Login = ({ setErrorMessage }) => {
           <a href='/register' style={{ margin: '0px 0px 0px 5px', fontWeight: '600', color: '#0095f6' }}>Sign Up</a>
         </Card.Content>
       </Card>
-    </>
+    </div>
   );
 };
 

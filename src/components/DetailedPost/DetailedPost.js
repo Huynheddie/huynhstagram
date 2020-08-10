@@ -45,7 +45,7 @@ const DetailedPost = () => {
     <>
       { post && (
       <Grid columns='2' centered>
-        <Grid.Row>
+        <Grid.Row className='grid-row'>
 
           <DetailedPostImage post={post} />
           <DetailedPostText

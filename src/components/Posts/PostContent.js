@@ -7,15 +7,11 @@ import UserProfileLink from '../UserProfile/UserProfileLink';
 const PostContent = ({ post, isDetailedPage }) => (
   <div className={isDetailedPage ? 'detailed-comment-text' : 'post-comment-display'}>
     { isDetailedPage
-    && (
-    <div style={{ marginBottom: 'auto' }}>
-      <UserThumbnail profileImage={post.user.profileImage} color='fff' />
-    </div>
-    ) }
+      && <UserThumbnail profileImage={post.user.profileImage} color='fff' />}
 
     { isDetailedPage
     && (
-    <Card.Description className='post-content-long'>
+    <Card.Description className='post-content-long' style={{ width: '85%' }}>
       <UserProfileLink userId={post.user.id} username={post.user.username} className='post-subheader' />
       {post.content}
       <Card.Meta className='detailed-comment-time'>{dateFormatter.timeSinceCondensed(post.date)}</Card.Meta>

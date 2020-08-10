@@ -7,4 +7,20 @@ const userOwnedPost = (p) => {
   return false;
 };
 
-export default { userOwnedPost };
+const shuffle = (arr) => {
+  const shuffledArr = arr;
+  let x = arr.length;
+
+  while (x >= 1) {
+    const index = Math.floor(Math.random() * x);
+
+    x -= 1;
+
+    const temp = shuffledArr[x];
+    shuffledArr[x] = shuffledArr[index];
+    shuffledArr[index] = temp;
+  }
+  return shuffledArr;
+};
+
+export default { userOwnedPost, shuffle };
