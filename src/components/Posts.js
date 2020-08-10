@@ -49,6 +49,7 @@ const Posts = ({ pageLoading, posts, handleDeletePost, handleEditPost }) => {
             publicId={post.imageId}
             width='650'
             style={{ width: '100%' }}
+            className='posts-image'
           />
 
           <PostInteractions post={post} handleEditPost={handleEditPost} />

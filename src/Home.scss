@@ -123,8 +123,11 @@ a:hover {
 	background-color: transparent !important;
 }
 
-.detailed-post-image-column {
+#detailed-post-image-column {
 	padding-right: 0px !important;
+	// width: 55% !important;
+	width: auto !important;
+	max-height: 700px;
 }
 
 .detailed-post-image-card {
@@ -141,8 +144,10 @@ a:hover {
 }
 
 .detailed-post-image {
-	width: 100% !important;
-	height: auto;
+	// width: 100% !important;
+	// height: auto;
+	width: auto !important;
+	max-height: 600px;
 }
 
 .detailed-post-text-column {
@@ -451,3 +456,6 @@ a:hover {
 // .add-card {
 // 	margin: 0% 20% 0% 20%;
 // }
+
+posts-image {
+}
