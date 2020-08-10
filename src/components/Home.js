@@ -18,9 +18,9 @@ const Home = () => {
     const getAllUsers = async () => {
       let response = await userService.getAllUsers();
       response = response.filter((user) => user.followers.findIndex((follower) => follower.id === loggedInUser.id) === -1 && user.id !== loggedInUser.id);
-      if (process.env.NODE_ENV === 'development') {
-        console.log('Users:', response);
-      }
+      // if (process.env.NODE_ENV === 'development') {
+      console.log('Users:', response);
+      // }
       setUsers(postHelper.shuffle(response).slice(0, 5));
       response = await userService.getUser(loggedInUser.id);
       setCurrentUser(response);
