@@ -12,4 +12,8 @@ An Instagram web-application clone where users can create and interact with post
 2. [React GitHub Corner](https://www.npmjs.com/package/react-github-corner)
 3. [Semantic UI React](https://react.semantic-ui.com/)
 
+## Supported Browsers
+* Google Chrome (recommended)
+* Firefox
+
 ## Images
