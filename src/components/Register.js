@@ -22,6 +22,12 @@ const Register = () => {
         setErrorMessage('Password must be at least 8 characters long.');
         return;
       }
+
+      if (username.indexOf(' ') !== -1) {
+        setErrorMessage('Username cannot contain spaces.');
+        return;
+      }
+
       setIsLoading(true);
       await userService.register({
         username, name, password,
@@ -47,7 +53,7 @@ const Register = () => {
 
   const handleChangeUsername = async (event) => {
     event.preventDefault();
-    setUsername(event.target.value.slice(0, maxLength));
+    setUsername(event.target.value.slice(0, maxLength).trim());
   };
 
   return (
