@@ -27,58 +27,60 @@ An Instagram web-application clone where users can create and interact with post
 <details>
   <summary>Login and Register Page</summary>
   
-  ![Image](images/login.jpg)
-  ![Image](images/register.jpg)
+  ![Image](images/login.JPG)
+  ![Image](images/register.JPG)
 </details>
 
 <details>
   <summary>Home Page</summary>
 
-![Image](images/start-page.jpg)
+  ![Image](images/start-page.JPG)
 
-After following a user from the **Suggested Users** section will update the Home feed with new posts.
-![Image](images/start-page-follow.jpg)
+### After following a user from the **Suggested Users** section will update the Home feed with new posts.
+
+  ![Image](images/start-page-follow.JPG)
 
 </details>
 
 <details>
   <summary>Creating a Post</summary>
 
-![Image](images/create-post.jpg)
-![Image](images/create-input.jpg)
+  ![Image](images/create-post.JPG)
+  ![Image](images/create-input.JPG)
 
-Updated Home feed with newly created post
-![Image](images/updated-home-page.jpg)
+### Updated Home feed with newly created post
 
+  ![Image](images/updated-home-page.JPG)
 </details>
 
 <details>
   <summary>User Profile Page</summary>
   
-  ![Image](images/profile-page.jpg)
+  ![Image](images/profile-page.JPG)
   
-  Edit Biography
-  ![Image](images/edit-bio.jpg)
+  ### Edit Biography
   
-  Change Profile Picture
-  ![Image](images/new-profile-pic.jpg)
+  ![Image](images/edit-bio.JPG)
   
-  Updated User Profile
-  ![Image](images/updated-profile.jpg)
+  ### Change Profile Picture
+  
+  ![Image](images/new-profile-pic.JPG)
+  
+  ### Updated User Profile
+  
+  ![Image](images/updated-profile.JPG)
 </details>
 
 <details>
   <summary>Followers and Following</summary>
 
-![Image](images/followers.jpg)
-![Image](images/following.jpg)
-
+  ![Image](images/followers.JPG)
+  ![Image](images/following.JPG)
 </details>
 
 <details>
   <summary>Search Bar</summary>
 
-![Image](images/search.jpg)
-![Image](images/search-result.jpg)
-
+  ![Image](images/search.JPG)
+  ![Image](images/search-result.JPG)
 </details>
