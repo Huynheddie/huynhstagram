@@ -1,9 +1,9 @@
 # Huynhstagram
+An Instagram web-application clone where users can create and interact with posts as well as other users. 
 
-An Instagram web-application clone where users can create and interact with posts as well as other users.
+[Huynhstagram Server Repo](https://github.com/Huynheddie/huynhstagram-server)
 
 ## Built With
-
 - React
 - Node.JS
 - Express
