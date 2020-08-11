@@ -28,3 +28,50 @@ An Instagram web-application clone where users can create and interact with post
   ![Image](images/login.JPG)
   ![Image](images/register.JPG)
 </details>
+
+<details>
+  <summary>Home Page</summary>
+
+![Image](images/start-page.JPG)
+After following a user from the **Suggested Users** section will update the Home feed with new posts.
+![Image](images/start-page-follow.JPG)
+
+</details>
+
+<details>
+  <summary>Creating a Post</summary>
+
+![Image](images/create-post.JPG)
+![Image](images/create-post-input.JPG)
+Updated Home feed with newly created post
+![Image](images/updated-home-page.JPG)
+
+</details>
+
+<details>
+  <summary>User Profile Page</summary>
+  
+  ![Image](images/profile-page.JPG)
+  Edit Biography
+  ![Image](images/edit-bio.JPG)
+  Change Profile Picture
+  ![Image](images/new-profile-pic.JPG)
+  Updated User Profile
+  ![Image](images/updated-profile.JPG)
+</details>
+
+<details>
+  <summary>Followers and Following</summary>
+
+![Image](images/followers.JPG)
+![Image](images/following.JPG)
+
+</details>
+
+<details>
+  <summary>Search Bar</summary>
+
+![Image](images/search.JPG)
+![Image](images/search-result.JPG)
+
+</details>
