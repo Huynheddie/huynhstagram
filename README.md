@@ -27,55 +27,58 @@ An Instagram web-application clone where users can create and interact with post
 <details>
   <summary>Login and Register Page</summary>
   
-  ![Image](images/login.JPG)
-  ![Image](images/register.JPG)
+  ![Image](images/login.jpg)
+  ![Image](images/register.jpg)
 </details>
 
 <details>
   <summary>Home Page</summary>
 
-  ![Image](images/start-page.JPG)
+![Image](images/start-page.jpg)
 
 After following a user from the **Suggested Users** section will update the Home feed with new posts.
-  ![Image](images/start-page-follow.JPG)
+![Image](images/start-page-follow.jpg)
 
 </details>
 
 <details>
   <summary>Creating a Post</summary>
 
-  ![Image](images/create-post.JPG)
-  ![Image](images/create-input.JPG)
+![Image](images/create-post.jpg)
+![Image](images/create-input.jpg)
 
 Updated Home feed with newly created post
-  ![Image](images/updated-home-page.JPG)
+![Image](images/updated-home-page.jpg)
+
 </details>
 
 <details>
   <summary>User Profile Page</summary>
   
-  ![Image](images/profile-page.JPG)
+  ![Image](images/profile-page.jpg)
   
   Edit Biography
-  ![Image](images/edit-bio.JPG)
+  ![Image](images/edit-bio.jpg)
   
   Change Profile Picture
-  ![Image](images/new-profile-pic.JPG)
+  ![Image](images/new-profile-pic.jpg)
   
   Updated User Profile
-  ![Image](images/updated-profile.JPG)
+  ![Image](images/updated-profile.jpg)
 </details>
 
 <details>
   <summary>Followers and Following</summary>
 
-  ![Image](images/followers.JPG)
-  ![Image](images/following.JPG)
+![Image](images/followers.jpg)
+![Image](images/following.jpg)
+
 </details>
 
 <details>
   <summary>Search Bar</summary>
 
-  ![Image](images/search.JPG)
-  ![Image](images/search-result.JPG)
+![Image](images/search.jpg)
+![Image](images/search-result.jpg)
+
 </details>
